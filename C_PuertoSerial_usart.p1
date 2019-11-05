@@ -1301,21 +1301,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _EECON1bits `VS139  1 e@396 ]
 "1666 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\pic16f887.h
 [v _EECON2 `Vuc  1 e@397 ]
-"26 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
-[v _pa `*uc  1 e ]
-"27 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
-[v _input `uc  -> 17 `i e ]
 "28 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
-[v _convint `i  1 e ]
+[v _pa `*uc  1 e ]
 "29 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _input `uc  -> 17 `i e ]
+"30 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _convint `i  1 e ]
+"31 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
 [v _dir `i  1 e ]
-"35 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+"37 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
 [v _init_value `uc  1 e ]
+"48 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _b0 `us  1 e ]
+"49 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _nin `i  1 e ]
+"50 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _carac `uc  -> 5 `i e ]
+"51 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _carac2 `uc  -> 3 `i e ]
+"52 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _num `f  1 e ]
+"53 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _num1 `f  1 e ]
+"54 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _num3 `f  1 e ]
 [p mainexit ]
-"21 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+"24 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\conio.h
 [v _putch `(v  0 ef1`uc ]
-"22 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+"206 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h
+[v _sprintf `(i  0 e1v`*uc`*Cuc ]
+"22 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\conio.h
 [v _getch `(uc  0 ef ]
+[p f _sprintf 8396800 ]
 [; ;pic16f887.h: 118: volatile unsigned char INDF @ 0x000;
 [; ;pic16f887.h: 122: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f887.h: 126: volatile unsigned char PCL @ 0x002;
@@ -2528,534 +2545,683 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom_routines.h: 43: extern void eecpymem(volatile unsigned char *to, eeprom unsigned char *from, unsigned char size);
 [; ;eeprom_routines.h: 44: extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsigned char size);
 [; ;pic.h: 154: extern void _delay(unsigned long);
-"6 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
-[; ;C_PuertoSerial_usart.c: 6: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF");
+[; ;stdio.h: 12: typedef int ptrdiff_t;
+[; ;stdio.h: 13: typedef unsigned size_t;
+[; ;stdio.h: 14: typedef unsigned short wchar_t;
+[; ;stdarg.h: 31: typedef void * va_list[1];
+[; ;stdarg.h: 34: extern void * __va_start(void);
+[; ;stdarg.h: 37: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 27: extern int errno;
+[; ;stdio.h: 58: struct __prbuf
+[; ;stdio.h: 59: {
+[; ;stdio.h: 60: char * ptr;
+[; ;stdio.h: 61: void (* func)(char);
+[; ;stdio.h: 62: };
+[; ;conio.h: 17: extern int errno;
+[; ;conio.h: 20: extern void init_uart(void);
+[; ;conio.h: 22: extern char getch(void);
+[; ;conio.h: 23: extern char getche(void);
+[; ;conio.h: 24: extern void putch(char);
+[; ;conio.h: 25: extern void ungetch(char);
+[; ;conio.h: 27: extern bit kbhit(void);
+[; ;conio.h: 31: extern char * cgets(char *);
+[; ;conio.h: 32: extern void cputs(const char *);
+[; ;stdio.h: 103: extern int cprintf(char *, ...);
+[; ;stdio.h: 108: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 195: extern char * gets(char *);
+[; ;stdio.h: 196: extern int puts(const char *);
+[; ;stdio.h: 197: extern int scanf(const char *, ...);
+[; ;stdio.h: 198: extern int sscanf(const char *, const char *, ...);
+[; ;stdio.h: 199: extern int vprintf(const char *, va_list);
+[; ;stdio.h: 200: extern int vsprintf(char *, const char *, va_list);
+[; ;stdio.h: 201: extern int vscanf(const char *, va_list ap);
+[; ;stdio.h: 202: extern int vsscanf(const char *, const char *, va_list);
+[; ;stdio.h: 206: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 207: extern int printf(const char *, ...);
+[; ;ctype.h: 3: extern bit isalpha(char);
+[; ;ctype.h: 4: extern bit isupper(char);
+[; ;ctype.h: 5: extern bit islower(char);
+[; ;ctype.h: 6: extern bit isdigit(char);
+[; ;ctype.h: 7: extern bit isxdigit(char);
+[; ;ctype.h: 8: extern bit isspace(char);
+[; ;ctype.h: 9: extern bit ispunct(char);
+[; ;ctype.h: 10: extern bit isalnum(char);
+[; ;ctype.h: 11: extern bit isprint(char);
+[; ;ctype.h: 12: extern bit isgraph(char);
+[; ;ctype.h: 13: extern bit iscntrl(char);
+[; ;ctype.h: 15: extern char toupper(char);
+[; ;ctype.h: 16: extern char tolower(char);
+"8 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[; ;C_PuertoSerial_usart.c: 8: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
 [; 	dw 0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF ;#
-"7
-[; ;C_PuertoSerial_usart.c: 7: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFF & 0xFFFF");
+"9
+[; ;C_PuertoSerial_usart.c: 9: asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFF & 0xFFFF");
 [; 	psect config,class=CONFIG,delta=2 ;#
 [; 	dw 0xFFFF & 0xFFFF ;#
-"9
+"11
 [v _msecbase `(v  1 ef ]
 {
-[; ;C_PuertoSerial_usart.c: 9: void msecbase(){
+[; ;C_PuertoSerial_usart.c: 11: void msecbase(){
 [e :U _msecbase ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 12: OPTION_REG = 0b00000001;
-"12
-[e = _OPTION_REG -> -> 1 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 13: TMR0 = 0x07;
-"13
-[e = _TMR0 -> -> 7 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 14: while(!T0IF);
+[; ;C_PuertoSerial_usart.c: 14: OPTION_REG = 0b00000001;
 "14
-[e $U 142  ]
-[e :U 143 ]
-[e :U 142 ]
-[e $ ! _T0IF 143  ]
-[e :U 144 ]
-[; ;C_PuertoSerial_usart.c: 15: T0IF = 0;
+[e = _OPTION_REG -> -> 1 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 15: TMR0 = 0x07;
 "15
-[e = _T0IF -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 16: }
+[e = _TMR0 -> -> 7 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 16: while(!T0IF);
 "16
-[e :UE 141 ]
-}
+[e $U 143  ]
+[e :U 144 ]
+[e :U 143 ]
+[e $ ! _T0IF 144  ]
+[e :U 145 ]
+[; ;C_PuertoSerial_usart.c: 17: T0IF = 0;
+"17
+[e = _T0IF -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 18: }
 "18
+[e :UE 142 ]
+}
+"20
 [v _pause `(v  1 ef1`us ]
 {
-[; ;C_PuertoSerial_usart.c: 18: void pause( unsigned short msvalue ){
+[; ;C_PuertoSerial_usart.c: 20: void pause( unsigned short msvalue ){
 [e :U _pause ]
 [v _msvalue `us  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 19: for (unsigned short x=0; x<=msvalue; x++) msecbase();
-"19
+[; ;C_PuertoSerial_usart.c: 21: for (unsigned short x=0; x<=msvalue; x++) msecbase();
+"21
 {
 [v _x `us  1 a ]
 [e = _x -> -> 0 `i `us ]
-[e $U 149  ]
-[e :U 146 ]
+[e $U 150  ]
+[e :U 147 ]
 [e ( _msecbase ..  ]
 [e ++ _x -> -> 1 `i `us ]
-[e :U 149 ]
-[e $ <= -> _x `ui -> _msvalue `ui 146  ]
-[e :U 147 ]
+[e :U 150 ]
+[e $ <= -> _x `ui -> _msvalue `ui 147  ]
+[e :U 148 ]
 }
-[; ;C_PuertoSerial_usart.c: 20: }
-"20
-[e :UE 145 ]
+[; ;C_PuertoSerial_usart.c: 22: }
+"22
+[e :UE 146 ]
 }
-[; ;C_PuertoSerial_usart.c: 21: void putch(char);
-[; ;C_PuertoSerial_usart.c: 22: char getch(void );
-[; ;C_PuertoSerial_usart.c: 24: void gets_Serial(char *);
-"26
+[; ;C_PuertoSerial_usart.c: 23: void putch(char);
+[; ;C_PuertoSerial_usart.c: 24: char getch(void );
+[; ;C_PuertoSerial_usart.c: 26: void gets_Serial(char *);
+"28
 [i _pa
 -> &U _PORTA `*uc
 ]
-[; ;C_PuertoSerial_usart.c: 26: unsigned char *pa=&PORTA;
-[; ;C_PuertoSerial_usart.c: 27: char input[17];
-[; ;C_PuertoSerial_usart.c: 28: int convint;
-[; ;C_PuertoSerial_usart.c: 29: int dir;
-[; ;C_PuertoSerial_usart.c: 30: int atoi( const char * s );
-"35
+[; ;C_PuertoSerial_usart.c: 28: unsigned char *pa=&PORTA;
+[; ;C_PuertoSerial_usart.c: 29: char input[17];
+[; ;C_PuertoSerial_usart.c: 30: int convint;
+[; ;C_PuertoSerial_usart.c: 31: int dir;
+[; ;C_PuertoSerial_usart.c: 32: int atoi( const char * s );
+"37
 [i _init_value
 -> -> 3 `i `uc
 ]
-[; ;C_PuertoSerial_usart.c: 35: char init_value=0x03;
+[; ;C_PuertoSerial_usart.c: 37: char init_value=0x03;
+"48
+[i _b0
+-> -> 0 `i `us
+]
+[; ;C_PuertoSerial_usart.c: 48: unsigned short b0=0;
+"49
+[i _nin
+-> 0 `i
+]
+[; ;C_PuertoSerial_usart.c: 49: int nin=0x00;
+[; ;C_PuertoSerial_usart.c: 50: unsigned char carac[5];
+[; ;C_PuertoSerial_usart.c: 51: unsigned char carac2[3];
+"52
+[i _num
+-> -> 0 `i `f
+]
+[; ;C_PuertoSerial_usart.c: 52: float num=0;
+"53
+[i _num1
+-> .0.00488758553 `f
+]
+[; ;C_PuertoSerial_usart.c: 53: float num1=0.00488758553;
 "54
+[i _num3
+-> -> 0 `i `f
+]
+[; ;C_PuertoSerial_usart.c: 54: float num3=0;
+"68
 [v _lcd_write `(v  1 ef1`uc ]
 {
-[; ;C_PuertoSerial_usart.c: 53: void lcd_write(unsigned char c)
-[; ;C_PuertoSerial_usart.c: 54: {
+[; ;C_PuertoSerial_usart.c: 67: void lcd_write(unsigned char c)
+[; ;C_PuertoSerial_usart.c: 68: {
 [e :U _lcd_write ]
 [v _c `uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 55: pause(1);
-"55
+[; ;C_PuertoSerial_usart.c: 69: pause(1);
+"69
 [e ( _pause (1 -> -> 1 `i `us ]
-[; ;C_PuertoSerial_usart.c: 56: PORTD=((c >> 4) & 0x0F);
-"56
+[; ;C_PuertoSerial_usart.c: 70: PORTD=((c >> 4) & 0x0F);
+"70
 [e = _PORTD -> & >> -> _c `i -> 4 `i -> 15 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 57: ((RA6=1),(RA6=0));
-"57
+[; ;C_PuertoSerial_usart.c: 71: ((RA6=1),(RA6=0));
+"71
 [e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 58: PORTD=(c & 0x0F);
-"58
+[; ;C_PuertoSerial_usart.c: 72: PORTD=(c & 0x0F);
+"72
 [e = _PORTD -> & -> _c `i -> 15 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 59: ((RA6=1),(RA6=0));
-"59
+[; ;C_PuertoSerial_usart.c: 73: ((RA6=1),(RA6=0));
+"73
 [e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 60: }
-"60
-[e :UE 150 ]
-}
-"63
-[v _lcd_clear `(v  1 ef ]
-{
-[; ;C_PuertoSerial_usart.c: 62: void lcd_clear(void)
-[; ;C_PuertoSerial_usart.c: 63: {
-[e :U _lcd_clear ]
-[f ]
-[; ;C_PuertoSerial_usart.c: 64: RA7=0;
-"64
-[e = _RA7 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 65: lcd_write(0x1);
-"65
-[e ( _lcd_write (1 -> -> 1 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 66: pause(2);
-"66
-[e ( _pause (1 -> -> 2 `i `us ]
-[; ;C_PuertoSerial_usart.c: 67: }
-"67
+[; ;C_PuertoSerial_usart.c: 74: }
+"74
 [e :UE 151 ]
 }
-"70
+"77
+[v _lcd_clear `(v  1 ef ]
+{
+[; ;C_PuertoSerial_usart.c: 76: void lcd_clear(void)
+[; ;C_PuertoSerial_usart.c: 77: {
+[e :U _lcd_clear ]
+[f ]
+[; ;C_PuertoSerial_usart.c: 78: RA7=0;
+"78
+[e = _RA7 -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 79: lcd_write(0x1);
+"79
+[e ( _lcd_write (1 -> -> 1 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 80: pause(2);
+"80
+[e ( _pause (1 -> -> 2 `i `us ]
+[; ;C_PuertoSerial_usart.c: 81: }
+"81
+[e :UE 152 ]
+}
+"84
 [v _lcd_puts `(v  1 ef1`*Cuc ]
 {
-[; ;C_PuertoSerial_usart.c: 69: void lcd_puts(const char * s)
-[; ;C_PuertoSerial_usart.c: 70: {
+[; ;C_PuertoSerial_usart.c: 83: void lcd_puts(const char * s)
+[; ;C_PuertoSerial_usart.c: 84: {
 [e :U _lcd_puts ]
 [v _s `*Cuc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 71: RA7=1;
-"71
+[; ;C_PuertoSerial_usart.c: 85: RA7=1;
+"85
 [e = _RA7 -> -> 1 `i `b ]
-[; ;C_PuertoSerial_usart.c: 72: while(*s)
-"72
-[e $U 153  ]
-[e :U 154 ]
-[; ;C_PuertoSerial_usart.c: 73: lcd_write(*s++);
-"73
-[e ( _lcd_write (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
-[e :U 153 ]
-"72
-[e $ != -> *U _s `i -> -> -> 0 `i `Cuc `i 154  ]
+[; ;C_PuertoSerial_usart.c: 86: while(*s)
+"86
+[e $U 154  ]
 [e :U 155 ]
-[; ;C_PuertoSerial_usart.c: 74: }
-"74
-[e :UE 152 ]
+[; ;C_PuertoSerial_usart.c: 87: lcd_write(*s++);
+"87
+[e ( _lcd_write (1 *U ++ _s * -> -> 1 `i `x -> -> # *U _s `i `x ]
+[e :U 154 ]
+"86
+[e $ != -> *U _s `i -> -> -> 0 `i `Cuc `i 155  ]
+[e :U 156 ]
+[; ;C_PuertoSerial_usart.c: 88: }
+"88
+[e :UE 153 ]
 }
-"77
+"91
 [v _lcd_putch `(v  1 ef1`uc ]
 {
-[; ;C_PuertoSerial_usart.c: 76: void lcd_putch(char c)
-[; ;C_PuertoSerial_usart.c: 77: {
+[; ;C_PuertoSerial_usart.c: 90: void lcd_putch(char c)
+[; ;C_PuertoSerial_usart.c: 91: {
 [e :U _lcd_putch ]
 [v _c `uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 78: RA7=1;
-"78
+[; ;C_PuertoSerial_usart.c: 92: RA7=1;
+"92
 [e = _RA7 -> -> 1 `i `b ]
-[; ;C_PuertoSerial_usart.c: 79: lcd_write(c);
-"79
+[; ;C_PuertoSerial_usart.c: 93: lcd_write(c);
+"93
 [e ( _lcd_write (1 _c ]
-[; ;C_PuertoSerial_usart.c: 80: }
-"80
-[e :UE 156 ]
+[; ;C_PuertoSerial_usart.c: 94: }
+"94
+[e :UE 157 ]
 }
-"83
+"97
 [v _lcd_goto `(v  1 ef1`uc ]
 {
-[; ;C_PuertoSerial_usart.c: 82: void lcd_goto(unsigned char pos)
-[; ;C_PuertoSerial_usart.c: 83: {
+[; ;C_PuertoSerial_usart.c: 96: void lcd_goto(unsigned char pos)
+[; ;C_PuertoSerial_usart.c: 97: {
 [e :U _lcd_goto ]
 [v _pos `uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 84: RA7=0;
-"84
-[e = _RA7 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 85: lcd_write(0x80+pos);
-"85
-[e ( _lcd_write (1 -> + -> 128 `i -> _pos `i `uc ]
-[; ;C_PuertoSerial_usart.c: 86: }
-"86
-[e :UE 157 ]
-}
-"90
-[v _main `(v  1 ef ]
-{
-[; ;C_PuertoSerial_usart.c: 90: void main(){
-[e :U _main ]
-[f ]
-[; ;C_PuertoSerial_usart.c: 91: ANSEL=0x00;
-"91
-[e = _ANSEL -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 92: ANSELH=0x00;
-"92
-[e = _ANSELH -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 93: INTCON=0x00;
-"93
-[e = _INTCON -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 94: TRISA = 0x00;
-"94
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 95: TRISB = 0x00;
-"95
-[e = _TRISB -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 96: TRISD = 0x00;
-"96
-[e = _TRISD -> -> 0 `i `uc ]
 [; ;C_PuertoSerial_usart.c: 98: RA7=0;
 "98
 [e = _RA7 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 99: RA6=0;
+[; ;C_PuertoSerial_usart.c: 99: lcd_write(0x80+pos);
 "99
-[e = _RA6 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 100: RE1=0;
+[e ( _lcd_write (1 -> + -> 128 `i -> _pos `i `uc ]
+[; ;C_PuertoSerial_usart.c: 100: }
 "100
-[e = _RE1 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 102: PORTD=init_value;
-"102
-[e = _PORTD _init_value ]
-[; ;C_PuertoSerial_usart.c: 103: ((RA6=1),(RA6=0));
-"103
-[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 104: pause(10);
+[e :UE 158 ]
+}
 "104
-[e ( _pause (1 -> -> 10 `i `us ]
-[; ;C_PuertoSerial_usart.c: 105: ((RA6=1),(RA6=0));
+[v _main `(v  1 ef ]
+{
+[; ;C_PuertoSerial_usart.c: 104: void main(){
+[e :U _main ]
+[f ]
+[; ;C_PuertoSerial_usart.c: 105: ANSEL=0x00;
 "105
-[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 106: pause(10);
+[e = _ANSEL -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 106: ANSELH=0x00;
 "106
-[e ( _pause (1 -> -> 10 `i `us ]
-[; ;C_PuertoSerial_usart.c: 107: ((RA6=1),(RA6=0));
+[e = _ANSELH -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 107: INTCON=0x00;
 "107
-[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 108: pause(10);
+[e = _INTCON -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 108: TRISA = 0x00;
 "108
-[e ( _pause (1 -> -> 10 `i `us ]
-[; ;C_PuertoSerial_usart.c: 109: PORTD=2;
+[e = _TRISA -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 109: TRISB = 0x00;
 "109
-[e = _PORTD -> -> 2 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 110: ((RA6=1),(RA6=0));
+[e = _TRISB -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 110: TRISD = 0x00;
 "110
-[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
-[; ;C_PuertoSerial_usart.c: 112: lcd_write(0x28);
-"112
-[e ( _lcd_write (1 -> -> 40 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 113: lcd_write(0xC);
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 113: TRISE=0x03;
 "113
-[e ( _lcd_write (1 -> -> 12 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 114: lcd_clear();
+[e = _TRISE -> -> 3 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 114: ADCON1=0b00000000;
 "114
-[e ( _lcd_clear ..  ]
-[; ;C_PuertoSerial_usart.c: 115: lcd_write(0x06);
+[e = _ADCON1 -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 115: PR2=0xFF;
 "115
-[e ( _lcd_write (1 -> -> 6 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 117: TRISC7=1;
+[e = _PR2 -> -> 255 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 117: CCP1CON = 0xC0;
 "117
-[e = _TRISC7 -> -> 1 `i `b ]
-[; ;C_PuertoSerial_usart.c: 118: TRISC6=0;
+[e = _CCP1CON -> -> 192 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 118: CCP2CON = 0xC0;
 "118
-[e = _TRISC6 -> -> 0 `i `b ]
-[; ;C_PuertoSerial_usart.c: 119: OSCCON=0x70;
+[e = _CCP2CON -> -> 192 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 119: T2CKPS1 = 1;
 "119
-[e = _OSCCON -> -> 112 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 120: SPBRG=12;
+[e = _T2CKPS1 -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 120: T2CKPS0 = 1;
 "120
-[e = _SPBRG -> -> 12 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 121: RCSTA=0x90;
+[e = _T2CKPS0 -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 121: TMR2ON = 1;
 "121
-[e = _RCSTA -> -> 144 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 122: TXSTA=0x20;
-"122
-[e = _TXSTA -> -> 32 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 123: BAUDCTL=0x00;
-"123
-[e = _BAUDCTL -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 124: pause(500);
+[e = _TMR2ON -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 124: RA7=0;
 "124
-[e ( _pause (1 -> -> 500 `i `us ]
-[; ;C_PuertoSerial_usart.c: 125: PORTA=0x01;
+[e = _RA7 -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 125: RA6=0;
 "125
-[e = _PORTA -> -> 1 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 126: *pa=0xFF;
+[e = _RA6 -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 126: RE1=0;
 "126
-[e = *U _pa -> -> 255 `i `uc ]
+[e = _RE1 -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 128: PORTD=init_value;
 "128
-[v _char_recibido `uc  1 a ]
+[e = _PORTD _init_value ]
+[; ;C_PuertoSerial_usart.c: 129: ((RA6=1),(RA6=0));
+"129
+[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
+[; ;C_PuertoSerial_usart.c: 130: pause(10);
+"130
+[e ( _pause (1 -> -> 10 `i `us ]
+[; ;C_PuertoSerial_usart.c: 131: ((RA6=1),(RA6=0));
 "131
-[v _pos `uc  1 a ]
-[; ;C_PuertoSerial_usart.c: 128: char char_recibido;
-[; ;C_PuertoSerial_usart.c: 131: unsigned char pos=0;
-[e = _pos -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 132: for(int i=48; i<58; i++){
+[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
+[; ;C_PuertoSerial_usart.c: 132: pause(10);
 "132
+[e ( _pause (1 -> -> 10 `i `us ]
+[; ;C_PuertoSerial_usart.c: 133: ((RA6=1),(RA6=0));
+"133
+[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
+[; ;C_PuertoSerial_usart.c: 134: pause(10);
+"134
+[e ( _pause (1 -> -> 10 `i `us ]
+[; ;C_PuertoSerial_usart.c: 135: PORTD=2;
+"135
+[e = _PORTD -> -> 2 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 136: ((RA6=1),(RA6=0));
+"136
+[e ; -> = _RA6 -> -> 1 `i `b `i -> = _RA6 -> -> 0 `i `b `i ]
+[; ;C_PuertoSerial_usart.c: 138: lcd_write(0x28);
+"138
+[e ( _lcd_write (1 -> -> 40 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 139: lcd_write(0xC);
+"139
+[e ( _lcd_write (1 -> -> 12 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 140: lcd_clear();
+"140
+[e ( _lcd_clear ..  ]
+[; ;C_PuertoSerial_usart.c: 141: lcd_write(0x06);
+"141
+[e ( _lcd_write (1 -> -> 6 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 143: TRISC7=1;
+"143
+[e = _TRISC7 -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 144: TRISC6=0;
+"144
+[e = _TRISC6 -> -> 0 `i `b ]
+[; ;C_PuertoSerial_usart.c: 145: OSCCON=0x70;
+"145
+[e = _OSCCON -> -> 112 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 146: SPBRG=12;
+"146
+[e = _SPBRG -> -> 12 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 147: RCSTA=0x90;
+"147
+[e = _RCSTA -> -> 144 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 148: TXSTA=0x20;
+"148
+[e = _TXSTA -> -> 32 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 149: BAUDCTL=0x00;
+"149
+[e = _BAUDCTL -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 150: pause(500);
+"150
+[e ( _pause (1 -> -> 500 `i `us ]
+[; ;C_PuertoSerial_usart.c: 151: PORTA=0x01;
+"151
+[e = _PORTA -> -> 1 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 152: *pa=0xFF;
+"152
+[e = *U _pa -> -> 255 `i `uc ]
+"154
+[v _char_recibido `uc  1 a ]
+"155
+[v _char_pwm `uc  1 a ]
+"156
+[v F1732 `uc  -> 0 `x s ]
+[i F1732
+:U ..
+-> 72 `c
+-> 111 `c
+-> 108 `c
+-> 97 `c
+-> 32 `c
+-> 77 `c
+-> 117 `c
+-> 110 `c
+-> 100 `c
+-> 111 `c
+-> 0 `c
+..
+]
+[v _buffer `uc  11  a ]
+[; ;C_PuertoSerial_usart.c: 154: char char_recibido;
+[; ;C_PuertoSerial_usart.c: 155: char char_pwm;
+[; ;C_PuertoSerial_usart.c: 156: char buffer[] = "Hola Mundo";
+[e = _buffer F1732 ]
+"159
+[v _pos `uc  1 a ]
+[; ;C_PuertoSerial_usart.c: 159: unsigned char pos=0;
+[e = _pos -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 160: for(int i=48; i<58; i++){
+"160
 {
 [v _i `i  1 a ]
 [e = _i -> 48 `i ]
-[e $ < _i -> 58 `i 159  ]
-[e $U 160  ]
-[e :U 159 ]
-{
-[; ;C_PuertoSerial_usart.c: 133: putch(i);
-"133
-[e ( _putch (1 -> _i `uc ]
-[; ;C_PuertoSerial_usart.c: 134: pause(20);
-"134
-[e ( _pause (1 -> -> 20 `i `us ]
-"135
-}
-"132
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 58 `i 159  ]
+[e $ < _i -> 58 `i 160  ]
+[e $U 161  ]
 [e :U 160 ]
-"135
+{
+[; ;C_PuertoSerial_usart.c: 161: putch(i);
+"161
+[e ( _putch (1 -> _i `uc ]
+[; ;C_PuertoSerial_usart.c: 162: pause(20);
+"162
+[e ( _pause (1 -> -> 20 `i `us ]
+"163
 }
-[; ;C_PuertoSerial_usart.c: 135: }
-[; ;C_PuertoSerial_usart.c: 136: putch(0x0D);
-"136
+"160
+[e ++ _i -> 1 `i ]
+[e $ < _i -> 58 `i 160  ]
+[e :U 161 ]
+"163
+}
+[; ;C_PuertoSerial_usart.c: 163: }
+[; ;C_PuertoSerial_usart.c: 164: putch(0x0D);
+"164
 [e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 137: putch(0x0A);
-"137
+[; ;C_PuertoSerial_usart.c: 165: putch(0x0A);
+"165
 [e ( _putch (1 -> -> 10 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 139: for(int i=97; i<123; i++){
-"139
+[; ;C_PuertoSerial_usart.c: 167: for(int i=97; i<123; i++){
+"167
 {
 [v _i `i  1 a ]
 [e = _i -> 97 `i ]
-[e $ < _i -> 123 `i 162  ]
-[e $U 163  ]
-[e :U 162 ]
-{
-[; ;C_PuertoSerial_usart.c: 140: putch(i);
-"140
-[e ( _putch (1 -> _i `uc ]
-[; ;C_PuertoSerial_usart.c: 141: pause(20);
-"141
-[e ( _pause (1 -> -> 20 `i `us ]
-"142
-}
-"139
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 123 `i 162  ]
+[e $ < _i -> 123 `i 163  ]
+[e $U 164  ]
 [e :U 163 ]
-"142
-}
-[; ;C_PuertoSerial_usart.c: 142: }
-[; ;C_PuertoSerial_usart.c: 143: putch(0x0D);
-"143
-[e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 144: putch(0x0A);
-"144
-[e ( _putch (1 -> -> 10 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 145: PORTA=0x00;
-"145
-[e = _PORTA -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 146: pause(1000);
-"146
-[e ( _pause (1 -> -> 1000 `i `us ]
-[; ;C_PuertoSerial_usart.c: 176: while(1){
-"176
-[e :U 166 ]
 {
-[; ;C_PuertoSerial_usart.c: 177: char_recibido = getch();
-"177
-[e = _char_recibido ( _getch ..  ]
-[; ;C_PuertoSerial_usart.c: 178: putch(char_recibido);
-"178
-[e ( _putch (1 _char_recibido ]
-[; ;C_PuertoSerial_usart.c: 179: putch(0x0D);
-"179
-[e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 180: putch(0x0A);
-"180
-[e ( _putch (1 -> -> 10 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 182: lcd_goto(0);
-"182
-[e ( _lcd_goto (1 -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 183: lcd_putch(char_recibido);
-"183
-[e ( _lcd_putch (1 _char_recibido ]
-[; ;C_PuertoSerial_usart.c: 184: pause(500);
-"184
-[e ( _pause (1 -> -> 500 `i `us ]
-[; ;C_PuertoSerial_usart.c: 186: for(int i=97; i<123; i++){
-"186
-{
-[v _i `i  1 a ]
-[e = _i -> 97 `i ]
-[e $ < _i -> 123 `i 168  ]
-[e $U 169  ]
-[e :U 168 ]
-{
-[; ;C_PuertoSerial_usart.c: 187: putch(i);
-"187
+[; ;C_PuertoSerial_usart.c: 168: putch(i);
+"168
 [e ( _putch (1 -> _i `uc ]
-[; ;C_PuertoSerial_usart.c: 188: pause(20);
-"188
+[; ;C_PuertoSerial_usart.c: 169: pause(20);
+"169
 [e ( _pause (1 -> -> 20 `i `us ]
-"189
+"170
 }
-"186
+"167
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 123 `i 168  ]
-[e :U 169 ]
-"189
+[e $ < _i -> 123 `i 163  ]
+[e :U 164 ]
+"170
 }
-[; ;C_PuertoSerial_usart.c: 189: }
-[; ;C_PuertoSerial_usart.c: 190: putch(0x0D);
-"190
+[; ;C_PuertoSerial_usart.c: 170: }
+[; ;C_PuertoSerial_usart.c: 171: putch(0x0D);
+"171
 [e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 191: putch(0x0A);
-"191
+[; ;C_PuertoSerial_usart.c: 172: putch(0x0A);
+"172
 [e ( _putch (1 -> -> 10 `i `uc ]
-"195
-}
-[e :U 165 ]
-"176
-[e $U 166  ]
+[; ;C_PuertoSerial_usart.c: 173: PORTA=0x00;
+"173
+[e = _PORTA -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 174: pause(1000);
+"174
+[e ( _pause (1 -> -> 1000 `i `us ]
+[; ;C_PuertoSerial_usart.c: 180: while(1){
+"180
 [e :U 167 ]
-[; ;C_PuertoSerial_usart.c: 195: }
-[; ;C_PuertoSerial_usart.c: 198: }
+{
+[; ;C_PuertoSerial_usart.c: 182: ADCON0=0b11010101;
+"182
+[e = _ADCON0 -> -> 213 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 183: GO_DONE = 1;
+"183
+[e = _GO_DONE -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 184: while (GO_DONE ==1);
+"184
+[e $U 169  ]
+[e :U 170 ]
+[e :U 169 ]
+[e $ == -> _GO_DONE `i -> 1 `i 170  ]
+[e :U 171 ]
+[; ;C_PuertoSerial_usart.c: 185: nin=(ADRESH<<2)|(ADRESL>>6);
+"185
+[e = _nin | << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
+[; ;C_PuertoSerial_usart.c: 186: CCPR1L=ADRESH;
+"186
+[e = _CCPR1L _ADRESH ]
+[; ;C_PuertoSerial_usart.c: 187: num= num1*nin;
+"187
+[e = _num * _num1 -> _nin `f ]
+[; ;C_PuertoSerial_usart.c: 189: sprintf(buffer,"Valor es: %f",num);
+"189
+[e ( _sprintf (1 , (. , &U _buffer :s 1C -> _num `d ]
+[; ;C_PuertoSerial_usart.c: 192: char_recibido = getch();
+"192
+[e = _char_recibido ( _getch ..  ]
+[; ;C_PuertoSerial_usart.c: 194: putch(char_recibido);
+"194
+[e ( _putch (1 _char_recibido ]
+[; ;C_PuertoSerial_usart.c: 195: putch(0x0D);
+"195
+[e ( _putch (1 -> -> 13 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 196: putch(0x0A);
+"196
+[e ( _putch (1 -> -> 10 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 198: lcd_goto(0);
 "198
-[e :UE 158 ]
+[e ( _lcd_goto (1 -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 199: lcd_putch(char_recibido);
+"199
+[e ( _lcd_putch (1 _char_recibido ]
+[; ;C_PuertoSerial_usart.c: 200: pause(500);
+"200
+[e ( _pause (1 -> -> 500 `i `us ]
+[; ;C_PuertoSerial_usart.c: 220: for (char x = 0; x<17; x++)
+"220
+{
+[v _x `uc  1 a ]
+[e = _x -> -> 0 `i `uc ]
+[e $ < -> _x `i -> 17 `i 172  ]
+[e $U 173  ]
+"221
+[e :U 172 ]
+[; ;C_PuertoSerial_usart.c: 221: {
+{
+[; ;C_PuertoSerial_usart.c: 222: putch (buffer[x]);
+"222
+[e ( _putch (1 *U + &U _buffer * -> _x `ux -> -> # *U &U _buffer `ui `ux ]
+"223
 }
-"204
+"220
+[e ++ _x -> -> 1 `i `uc ]
+[e $ < -> _x `i -> 17 `i 172  ]
+[e :U 173 ]
+"223
+}
+[; ;C_PuertoSerial_usart.c: 223: }
+[; ;C_PuertoSerial_usart.c: 224: pause(200);
+"224
+[e ( _pause (1 -> -> 200 `i `us ]
+[; ;C_PuertoSerial_usart.c: 228: putch(0x0D);
+"228
+[e ( _putch (1 -> -> 13 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 229: putch(0x0A);
+"229
+[e ( _putch (1 -> -> 10 `i `uc ]
+"233
+}
+[e :U 166 ]
+"180
+[e $U 167  ]
+[e :U 168 ]
+[; ;C_PuertoSerial_usart.c: 233: }
+[; ;C_PuertoSerial_usart.c: 236: }
+"236
+[e :UE 159 ]
+}
+"242
 [v _putch `(v  1 ef1`uc ]
 {
-[; ;C_PuertoSerial_usart.c: 203: void putch(char dato)
-[; ;C_PuertoSerial_usart.c: 204: {
+[; ;C_PuertoSerial_usart.c: 241: void putch(char dato)
+[; ;C_PuertoSerial_usart.c: 242: {
 [e :U _putch ]
 [v _dato `uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 205: while(!TXIF) continue;
-"205
-[e $U 172  ]
-[e :U 173 ]
-[e $U 172  ]
-[e :U 172 ]
-[e $ ! _TXIF 173  ]
-[e :U 174 ]
-[; ;C_PuertoSerial_usart.c: 206: TXREG=dato;
-"206
-[e = _TXREG _dato ]
-[; ;C_PuertoSerial_usart.c: 207: }
-"207
-[e :UE 171 ]
-}
-"210
-[v _getch `(uc  1 ef ]
-{
-[; ;C_PuertoSerial_usart.c: 209: char getch()
-[; ;C_PuertoSerial_usart.c: 210: {
-[e :U _getch ]
-[f ]
-[; ;C_PuertoSerial_usart.c: 211: while(!RCIF) continue;
-"211
+[; ;C_PuertoSerial_usart.c: 243: while(!TXIF) continue;
+"243
 [e $U 176  ]
 [e :U 177 ]
 [e $U 176  ]
 [e :U 176 ]
-[e $ ! _RCIF 177  ]
+[e $ ! _TXIF 177  ]
 [e :U 178 ]
-[; ;C_PuertoSerial_usart.c: 212: return RCREG;
-"212
-[e ) _RCREG ]
-[e $UE 175  ]
-[; ;C_PuertoSerial_usart.c: 213: }
-"213
+[; ;C_PuertoSerial_usart.c: 244: TXREG=dato;
+"244
+[e = _TXREG _dato ]
+[; ;C_PuertoSerial_usart.c: 245: }
+"245
 [e :UE 175 ]
 }
-"215
+"248
+[v _getch `(uc  1 ef ]
+{
+[; ;C_PuertoSerial_usart.c: 247: char getch()
+[; ;C_PuertoSerial_usart.c: 248: {
+[e :U _getch ]
+[f ]
+[; ;C_PuertoSerial_usart.c: 249: while(!RCIF) continue;
+"249
+[e $U 180  ]
+[e :U 181 ]
+[e $U 180  ]
+[e :U 180 ]
+[e $ ! _RCIF 181  ]
+[e :U 182 ]
+[; ;C_PuertoSerial_usart.c: 250: return RCREG;
+"250
+[e ) _RCREG ]
+[e $UE 179  ]
+[; ;C_PuertoSerial_usart.c: 251: }
+"251
+[e :UE 179 ]
+}
+"253
 [v _gets_Serial `(v  1 ef1`*uc ]
 {
-[; ;C_PuertoSerial_usart.c: 215: void gets_Serial( char * s){
+[; ;C_PuertoSerial_usart.c: 253: void gets_Serial( char * s){
 [e :U _gets_Serial ]
 [v _s `*uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 217: for(int i=0; i<=16; i++) *(s+i)=0;
-"217
+[; ;C_PuertoSerial_usart.c: 255: for(int i=0; i<=16; i++) *(s+i)=0;
+"255
 {
 [v _i `i  1 a ]
 [e = _i -> 0 `i ]
-[e $ <= _i -> 16 `i 180  ]
-[e $U 181  ]
-[e :U 180 ]
+[e $ <= _i -> 16 `i 184  ]
+[e $U 185  ]
+[e :U 184 ]
 [e = *U + _s * -> _i `x -> -> # *U _s `i `x -> -> 0 `i `uc ]
 [e ++ _i -> 1 `i ]
-[e $ <= _i -> 16 `i 180  ]
-[e :U 181 ]
+[e $ <= _i -> 16 `i 184  ]
+[e :U 185 ]
 }
-[; ;C_PuertoSerial_usart.c: 218: for(int i=0; i<16; i++){
-"218
+[; ;C_PuertoSerial_usart.c: 256: for(int i=0; i<16; i++){
+"256
 {
 [v _i `i  1 a ]
 [e = _i -> 0 `i ]
-[e $ < _i -> 16 `i 183  ]
-[e $U 184  ]
-[e :U 183 ]
+[e $ < _i -> 16 `i 187  ]
+[e $U 188  ]
+[e :U 187 ]
 {
-"219
+"257
 [v _c `uc  1 a ]
-[; ;C_PuertoSerial_usart.c: 219: char c=getch();
+[; ;C_PuertoSerial_usart.c: 257: char c=getch();
 [e = _c ( _getch ..  ]
-[; ;C_PuertoSerial_usart.c: 220: PORTA=0x02;
-"220
+[; ;C_PuertoSerial_usart.c: 258: PORTA=0x02;
+"258
 [e = _PORTA -> -> 2 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 221: if(c==10 | c==13) break;
-"221
-[e $ ! | == -> _c `i -> 10 `i == -> _c `i -> 13 `i 186  ]
-[e $U 184  ]
-[e :U 186 ]
-[; ;C_PuertoSerial_usart.c: 222: *(s+i)=c;
-"222
+[; ;C_PuertoSerial_usart.c: 259: if(c==10 | c==13) break;
+"259
+[e $ ! | == -> _c `i -> 10 `i == -> _c `i -> 13 `i 190  ]
+[e $U 188  ]
+[e :U 190 ]
+[; ;C_PuertoSerial_usart.c: 260: *(s+i)=c;
+"260
 [e = *U + _s * -> _i `x -> -> # *U _s `i `x _c ]
-"223
+"261
 }
-"218
+"256
 [e ++ _i -> 1 `i ]
-[e $ < _i -> 16 `i 183  ]
-[e :U 184 ]
-"223
+[e $ < _i -> 16 `i 187  ]
+[e :U 188 ]
+"261
 }
-[; ;C_PuertoSerial_usart.c: 223: }
-[; ;C_PuertoSerial_usart.c: 224: PORTA=0x00;
-"224
+[; ;C_PuertoSerial_usart.c: 261: }
+[; ;C_PuertoSerial_usart.c: 262: PORTA=0x00;
+"262
 [e = _PORTA -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 225: }
-"225
-[e :UE 179 ]
+[; ;C_PuertoSerial_usart.c: 263: }
+"263
+[e :UE 183 ]
 }
+[a 1C 86 97 108 111 114 32 101 115 58 32 37 102 0 ]
+

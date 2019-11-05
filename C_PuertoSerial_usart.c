@@ -1,4 +1,6 @@
 #include <htc.h>
+#include <stdio.h>
+#include <ctype.h>
 
 #define RX_PIN TRISC7
 #define TX_PIN TRISC6
@@ -40,6 +42,18 @@ char init_value=0x03;
 
 #define LCD_DATA PORTD
 #define LCD_STROBE()  ((LCD_EN=1),(LCD_EN=0))
+
+//ADC PREP
+
+unsigned short b0=0;
+int nin=0x00;
+unsigned char carac[5];
+unsigned char carac2[3];
+float	num=0;
+float	num1=0.00488758553;
+float   num3=0;
+
+
 /*
 void msecbase(void)
 {
@@ -94,7 +108,19 @@ void main(){
     TRISA = 0x00;		//nible menos significativo de PORTA como entrada. 
     TRISB = 0x00;       //PORTB como salida (RE y RS)
     TRISD = 0x00;       //PORTD como salida (pines data de la LCD)
-    
+
+//ADC CONFIG    
+	TRISE=0x03;
+	ADCON1=0b00000000;
+	PR2=0xFF;
+
+	CCP1CON = 0xC0;
+	CCP2CON = 0xC0;
+	T2CKPS1 = 1;
+	T2CKPS0 = 1;
+	TMR2ON = 1;
+
+//LCD VARS
 	LCD_RS=0;
 	LCD_EN=0;
 	LCD_RW=0;
@@ -126,6 +152,8 @@ void main(){
     *pa=0xFF;
 
 	char char_recibido;
+	char char_pwm;
+	char buffer[] = "Hola Mundo";
     
 	//numeros
     unsigned char pos=0; 
@@ -145,36 +173,24 @@ void main(){
     PORTA=0x00; 
     pause(1000); 
 
-/*		char_recibido = getch();
-		putch(char_recibido);
-		pause(1500);
-		lcd_goto(0);
-		lcd_puts("hola");
-		pause(1500);
-		
-		lcd_clear();
-		
-		lcd_goto(0);
-//		lcd_puts(char_recibido);
-		pause(1500);
-		// gets_Serial(input);
-		// for (char x = 0; x<17; x++)
-		// 	{
-		// 	putch (input[x]);
-		// 	}
-		putch(0x0D);		// Send ASCII value for carriage return 
-		putch(0x0A);
-		pause(1500);
-*/		
 
-//	unsigned char *buffer = (char *)0x20;   //assign to start of gen.purpose registers
-    //printf("Enter your name: ");
-	
 //	getString(&buffer, 10);
 
 
 	while(1){
+		//LECTURA DEL PWM
+		ADCON0=0b11010101;
+		GO_DONE = 1;
+		while (GO_DONE ==1);
+		nin=(ADRESH<<2)|(ADRESL>>6);
+		CCPR1L=ADRESH;
+		num= num1*nin;
+		
+		sprintf(buffer,"Valor es: %f",num);
+	//	char_pwm = (char) num;
+		
 		char_recibido = getch();
+		
 		putch(char_recibido);
 		putch(0x0D);		// Send ASCII value for carriage return 
 		putch(0x0A);
@@ -182,12 +198,34 @@ void main(){
 		lcd_goto(0);
 		lcd_putch(char_recibido);
 		pause(500);
+/*
 		
-		 for(int i=97; i<123; i++){
+		 for(int i=97; i<117; i++){
 	        putch(i); 
 	        pause(20); 
 	    }
 	    putch(0x0D); 
+	    putch(0x0A); 
+
+*/
+/*		
+		char txt[] = "Hello World";
+		for (char x = 0; x<12; x++)
+			{
+			putch (txt[x]);
+			}
+*/		
+
+	//	gets_Serial(buffer);
+		for (char x = 0; x<17; x++)
+			{
+			putch (buffer[x]);
+			}
+		pause(200);
+
+		//buffer = "Hola Mundo";
+	
+		putch(0x0D); 
 	    putch(0x0A); 
 	    //PORTA=0x00; 
 	    //pause(1000); 

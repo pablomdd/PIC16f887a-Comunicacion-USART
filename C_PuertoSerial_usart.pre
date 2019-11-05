@@ -1553,7 +1553,87 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
-# 6 "C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c"
+# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+typedef int ptrdiff_t;
+typedef unsigned size_t;
+typedef unsigned short wchar_t;
+
+# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma inline(__va_start)
+extern void * __va_start(void);
+
+#pragma inline(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+extern int errno;
+
+# 58
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+# 195
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...);
+extern int sscanf(const char *, const char *, ...);
+extern int vprintf(const char *, va_list);
+extern int vsprintf(char *, const char *, va_list);
+extern int vscanf(const char *, va_list ap);
+extern int vsscanf(const char *, const char *, va_list);
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
+# 3 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\ctype.h"
+extern bit isalpha(char);
+extern bit isupper(char);
+extern bit islower(char);
+extern bit isdigit(char);
+extern bit isxdigit(char);
+extern bit isspace(char);
+extern bit ispunct(char);
+extern bit isalnum(char);
+extern bit isprint(char);
+extern bit isgraph(char);
+extern bit iscntrl(char);
+
+extern char toupper(char);
+extern char tolower(char);
+
+# 8 "C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF");
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFF & 0xFFFF");
 
@@ -1585,7 +1665,16 @@ int atoi( const char * s );
 
 char init_value=0x03;
 
-# 53
+# 48
+unsigned short b0=0;
+int nin=0x00;
+unsigned char carac[5];
+unsigned char carac2[3];
+float num=0;
+float num1=0.00488758553;
+float num3=0;
+
+# 67
 void lcd_write(unsigned char c)
 {
 pause(1);
@@ -1631,6 +1720,18 @@ TRISA = 0x00;
 TRISB = 0x00;
 TRISD = 0x00;
 
+
+TRISE=0x03;
+ADCON1=0b00000000;
+PR2=0xFF;
+
+CCP1CON = 0xC0;
+CCP2CON = 0xC0;
+T2CKPS1 = 1;
+T2CKPS0 = 1;
+TMR2ON = 1;
+
+
 RA7=0;
 RA6=0;
 RE1=0;
@@ -1662,6 +1763,8 @@ PORTA=0x01;
 *pa=0xFF;
 
 char char_recibido;
+char char_pwm;
+char buffer[] = "Hola Mundo";
 
 
 unsigned char pos=0;
@@ -1681,9 +1784,21 @@ putch(0x0A);
 PORTA=0x00;
 pause(1000);
 
-# 176
+# 180
 while(1){
+
+ADCON0=0b11010101;
+GO_DONE = 1;
+while (GO_DONE ==1);
+nin=(ADRESH<<2)|(ADRESL>>6);
+CCPR1L=ADRESH;
+num= num1*nin;
+
+sprintf(buffer,"Valor es: %f",num);
+
+
 char_recibido = getch();
+
 putch(char_recibido);
 putch(0x0D);
 putch(0x0A);
@@ -1692,10 +1807,15 @@ lcd_goto(0);
 lcd_putch(char_recibido);
 pause(500);
 
-for(int i=97; i<123; i++){
-putch(i);
-pause(20);
+# 220
+for (char x = 0; x<17; x++)
+{
+putch (buffer[x]);
 }
+pause(200);
+
+
+
 putch(0x0D);
 putch(0x0A);
 
