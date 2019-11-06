@@ -1633,7 +1633,7 @@ extern bit iscntrl(char);
 extern char toupper(char);
 extern char tolower(char);
 
-# 8 "C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c"
+# 9 "C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c"
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF");
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFF & 0xFFFF");
 
@@ -1650,7 +1650,7 @@ void pause( unsigned short msvalue ){
 for (unsigned short x=0; x<=msvalue; x++) msecbase();
 }
 void putch(char);
-char getch(void );
+char getch(void);
 
 void gets_Serial(char *);
 
@@ -1660,21 +1660,22 @@ int convint;
 int dir;
 int atoi( const char * s );
 
-
-
-
+# 44
 char init_value=0x03;
 
-# 48
+
+
+
 unsigned short b0=0;
 int nin=0x00;
+
 unsigned char carac[5];
 unsigned char carac2[3];
+
 float num=0;
 float num1=0.00488758553;
 float num3=0;
 
-# 67
 void lcd_write(unsigned char c)
 {
 pause(1);
@@ -1710,12 +1711,10 @@ RA7=0;
 lcd_write(0x80+pos);
 }
 
-
-
 void main(){
 ANSEL=0x00;
 ANSELH=0x00;
-INTCON=0x00;
+
 TRISA = 0x00;
 TRISB = 0x00;
 TRISD = 0x00;
@@ -1736,6 +1735,7 @@ RA7=0;
 RA6=0;
 RE1=0;
 
+pause(15);
 PORTD=init_value;
 ((RA6=1),(RA6=0));
 pause(10);
@@ -1751,6 +1751,7 @@ lcd_write(0xC);
 lcd_clear();
 lcd_write(0x06);
 
+
 TRISC7=1;
 TRISC6=0;
 OSCCON=0x70;
@@ -1759,12 +1760,16 @@ RCSTA=0x90;
 TXSTA=0x20;
 BAUDCTL=0x00;
 pause(500);
+
+
 PORTA=0x01;
 *pa=0xFF;
 
+
+
 char char_recibido;
 char char_pwm;
-char buffer[] = "Hola Mundo";
+char buffer[15];
 
 
 unsigned char pos=0;
@@ -1784,49 +1789,60 @@ putch(0x0A);
 PORTA=0x00;
 pause(1000);
 
-# 180
+
+
+
+gets_Serial(&buffer);
+
 while(1){
+lcd_clear();
 
 ADCON0=0b11010101;
 GO_DONE = 1;
 while (GO_DONE ==1);
 nin=(ADRESH<<2)|(ADRESL>>6);
 CCPR1L=ADRESH;
+
 num= num1*nin;
+int num_f = 255;
 
-sprintf(buffer,"Valor es: %f",num);
+sprintf(buffer,"El valor es: %f  ", num);
 
 
-char_recibido = getch();
-
-putch(char_recibido);
-putch(0x0D);
-putch(0x0A);
-
-lcd_goto(0);
-lcd_putch(char_recibido);
-pause(500);
-
-# 220
 for (char x = 0; x<17; x++)
 {
 putch (buffer[x]);
 }
 pause(200);
 
-
-
 putch(0x0D);
 putch(0x0A);
 
 
+gets_Serial(&input);
+
+
+for (char x = 0; x<15; x++)
+{
+putch (input[x]);
+}
+pause(200);
+
+
+lcd_goto(0);
+lcd_puts(input);
+lcd_goto(0x40);
+lcd_puts(buffer);
+
+pause(2000);
+
+putch(0x0D);
+putch(0x0A);
 
 }
 
 
 }
-
-
 
 
 void putch(char dato)
@@ -1846,10 +1862,10 @@ void gets_Serial( char * s){
 for(int i=0; i<=16; i++) *(s+i)=0;
 for(int i=0; i<16; i++){
 char c=getch();
-PORTA=0x02;
+
 if(c==10 | c==13) break;
 *(s+i)=c;
 }
-PORTA=0x00;
+
 }
 

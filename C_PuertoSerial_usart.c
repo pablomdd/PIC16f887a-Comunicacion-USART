@@ -1,4 +1,5 @@
 #include <htc.h>
+#include <pic.h>
 #include <stdio.h>
 #include <ctype.h>
 
@@ -21,7 +22,7 @@ void pause( unsigned short msvalue ){
 	for (unsigned short x=0; x<=msvalue; x++) msecbase();				//Jump to millisec delay routine
 }
 void putch(char); 
-char getch(void ); 
+char getch(void); 
 
 void gets_Serial(char *); 
 
@@ -34,35 +35,26 @@ int  atoi( const char * s );
 
 //LCD CONFIG
 
-char init_value=0x03;
-
 #define LCD_RS RA7
 #define LCD_RW RE1
 #define LCD_EN RA6
 
 #define LCD_DATA PORTD
 #define LCD_STROBE()  ((LCD_EN=1),(LCD_EN=0))
+char init_value=0x03;
+
 
 //ADC PREP
 
 unsigned short b0=0;
 int nin=0x00;
+
 unsigned char carac[5];
 unsigned char carac2[3];
+
 float	num=0;
 float	num1=0.00488758553;
 float   num3=0;
-
-
-/*
-void msecbase(void)
-{
-	OPTION_REG = 0b00000001;		
-	TMR0 = 0xD;				
-	while(!T0IF);			
-	T0IF = 0;				
-}
-*/
 
 void lcd_write(unsigned char c)
 {
@@ -99,12 +91,10 @@ void lcd_goto(unsigned char pos)
 	lcd_write(0x80+pos);
 }
 
-
-
 void main(){
     ANSEL=0x00; 
     ANSELH=0x00; 
-    INTCON=0x00; 
+   // INTCON=0x00; 
     TRISA = 0x00;		//nible menos significativo de PORTA como entrada. 
     TRISB = 0x00;       //PORTB como salida (RE y RS)
     TRISD = 0x00;       //PORTD como salida (pines data de la LCD)
@@ -125,6 +115,7 @@ void main(){
 	LCD_EN=0;
 	LCD_RW=0;
 	
+	pause(15);
 	LCD_DATA=init_value;
 	LCD_STROBE();
 	pause(10);
@@ -140,6 +131,7 @@ void main(){
 	lcd_clear();
 	lcd_write(0x06);
 	
+	//Serial port config
     RX_PIN=1; 
     TX_PIN=0; 
     OSCCON=0x70; 
@@ -148,12 +140,16 @@ void main(){
     TXSTA=0x20; //Baja velocidad, SYNC=0 modo asÃ­ncrono, TXEN=1, 8 bits.
     BAUDCTL=0x00; //Detector de Baudios deshabilitado, 8 bits, sin inversiÃ³n, 
     pause(500); 
-    PORTA=0x01;
+   
+
+	 PORTA=0x01;
     *pa=0xFF;
 
+
+//OTHER VARS
 	char char_recibido;
 	char char_pwm;
-	char buffer[] = "Hola Mundo";
+	char buffer[15];
     
 	//numeros
     unsigned char pos=0; 
@@ -175,67 +171,56 @@ void main(){
 
 
 //	getString(&buffer, 10);
-
-
+	
+	gets_Serial(&buffer);
+	
 	while(1){
+		lcd_clear();
 		//LECTURA DEL PWM
 		ADCON0=0b11010101;
 		GO_DONE = 1;
 		while (GO_DONE ==1);
 		nin=(ADRESH<<2)|(ADRESL>>6);
 		CCPR1L=ADRESH;
+
 		num= num1*nin;
-		
-		sprintf(buffer,"Valor es: %f",num);
-	//	char_pwm = (char) num;
-		
-		char_recibido = getch();
-		
-		putch(char_recibido);
-		putch(0x0D);		// Send ASCII value for carriage return 
-		putch(0x0A);
-	
-		lcd_goto(0);
-		lcd_putch(char_recibido);
-		pause(500);
-/*
-		
-		 for(int i=97; i<117; i++){
-	        putch(i); 
-	        pause(20); 
-	    }
-	    putch(0x0D); 
-	    putch(0x0A); 
+		int num_f = 255;
 
-*/
-/*		
-		char txt[] = "Hello World";
-		for (char x = 0; x<12; x++)
-			{
-			putch (txt[x]);
-			}
-*/		
-
-	//	gets_Serial(buffer);
+		sprintf(buffer,"El valor es: %f  ", num);
+		
+	//	Muestra en Terminal el valor leído desde el PIC
 		for (char x = 0; x<17; x++)
 			{
 			putch (buffer[x]);
 			}
 		pause(200);
+	//	Retorno de Carro, Salto de línea en hex ASCII		
+		putch(0x0D); 
+	    putch(0x0A); 
+		
+		//Obtiene String desde la terminal
+		gets_Serial(&input);
 
-		//buffer = "Hola Mundo";
+		//Muestra en pantalla el mensaje escrito
+		for (char x = 0; x<15; x++)
+			{
+			putch (input[x]);
+			}
+		pause(200);
+
+		//Imprime en LCD 
+		lcd_goto(0);
+		lcd_puts(input);
+		lcd_goto(0x40);
+		lcd_puts(buffer);
+		//esta pausa es para que el LCD muestre el mensaje
+		pause(2000);
 	
 		putch(0x0D); 
 	    putch(0x0A); 
-	    //PORTA=0x00; 
-	    //pause(1000); 
 		
 	}
-
-
 }
-
-
 
 
 void putch(char dato)
@@ -255,11 +240,11 @@ void gets_Serial( char * s){
     for(int i=0; i<=16; i++) *(s+i)=0; 
     for(int i=0; i<16; i++){
         char c=getch();
-        PORTA=0x02; 
+        //PORTA=0x02; 
         if(c==10 | c==13) break; 
         *(s+i)=c; 
     }
-    PORTA=0x00; 
+    //PORTA=0x00; 
 }
 
 
