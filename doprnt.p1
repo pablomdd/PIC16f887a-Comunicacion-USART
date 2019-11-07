@@ -1,20 +1,12 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "350 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
-[v _dpowers `Cul  -> 0 `x s ]
-"384 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
-[v __npowers_ `Cd  -> 0 `x e ]
-"384 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
-[v __powers_ `Cd  -> 0 `x e ]
+[v _dpowers `Cui  -> 0 `x s ]
 "34 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdarg.h
 [v ___va_start `(*v  0 ef ]
 [p i ___va_start ]
 "37 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdarg.h
 [v ___va_arg `(*v  0 ev`*v ]
 [p i ___va_arg ]
-"390 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
-[v __tdiv_to_l_ `(ul  0 ef2`f`f ]
-"388 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
-[v __div_to_l_ `(ul  0 ef2`d`d ]
 [; ;stdio.h: 12: typedef int ptrdiff_t;
 [; ;stdio.h: 13: typedef unsigned size_t;
 [; ;stdio.h: 14: typedef unsigned short wchar_t;
@@ -204,130 +196,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 "350 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c
 [i _dpowers
 :U ..
--> -> -> 1 `i `l `ul
--> -> -> 10 `i `l `ul
--> -> -> 100 `i `l `ul
--> -> -> 1000 `i `l `ul
--> -> -> 10000 `i `l `ul
-"352
--> -> 100000 `l `ul
--> -> 1000000 `l `ul
--> -> 10000000 `l `ul
--> -> 100000000 `l `ul
-"355
--> -> 1000000000 `l `ul
+-> -> 1 `i `ui
+-> -> 10 `i `ui
+-> -> 100 `i `ui
+-> -> 1000 `i `ui
+-> -> 10000 `i `ui
 ..
 ]
-[; ;doprnt.c: 350: const static unsigned long dpowers[] = {1, 10, 100, 1000, 10000,
-[; ;doprnt.c: 352: 100000, 1000000, 10000000, 100000000,
-[; ;doprnt.c: 353: 1000000000
+[; ;doprnt.c: 350: const static unsigned int dpowers[] = {1, 10, 100, 1000, 10000,
 [; ;doprnt.c: 355: };
-[; ;doprnt.c: 384: extern const double _powers_[], _npowers_[];
-[; ;doprnt.c: 388: extern unsigned long _div_to_l_(double, double);
-[; ;doprnt.c: 390: extern unsigned long _tdiv_to_l_(float, float);
-"406
-[v _fround `(d  1 sf1`uc ]
-{
-[; ;doprnt.c: 404: static double
-[; ;doprnt.c: 405: fround(unsigned char prec)
-[; ;doprnt.c: 406: {
-[e :U _fround ]
-[v _prec `uc  1 r1 ]
-[f ]
-[; ;doprnt.c: 409: if(prec>=110)
-"409
-[e $ ! >= -> _prec `i -> 110 `i 7  ]
-[; ;doprnt.c: 410: return 0.5 * _npowers_[prec/100+18] * _npowers_[(prec%100)/10+9] * _npowers_[prec%10];
-"410
-[e ) * * * .0.5 *U + &U __npowers_ * -> -> + / -> _prec `i -> 100 `i -> 18 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> + / % -> _prec `i -> 100 `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> % -> _prec `i -> 10 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 6  ]
-[e $U 8  ]
-"411
-[e :U 7 ]
-[; ;doprnt.c: 411: else if(prec > 10)
-[e $ ! > -> _prec `i -> 10 `i 9  ]
-[; ;doprnt.c: 412: return 0.5 * _npowers_[prec/10+9] * _npowers_[prec%10];
-"412
-[e ) * * .0.5 *U + &U __npowers_ * -> -> + / -> _prec `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> % -> _prec `i -> 10 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 6  ]
-[e :U 9 ]
-"413
-[e :U 8 ]
-[; ;doprnt.c: 413: return 0.5 * _npowers_[prec];
-[e ) * .0.5 *U + &U __npowers_ * -> _prec `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 6  ]
-[; ;doprnt.c: 414: }
-"414
-[e :UE 6 ]
-}
-"422
-[v _scale `(d  1 sf1`c ]
-{
-[; ;doprnt.c: 420: static double
-[; ;doprnt.c: 421: scale(signed char scl)
-[; ;doprnt.c: 422: {
-[e :U _scale ]
-[v _scl `c  1 r1 ]
-[f ]
-[; ;doprnt.c: 424: if(scl < 0) {
-"424
-[e $ ! < -> _scl `i -> 0 `i 11  ]
-{
-[; ;doprnt.c: 425: scl = -scl;
-"425
-[e = _scl -> -U -> _scl `i `c ]
-[; ;doprnt.c: 426: if(scl>=110)
-"426
-[e $ ! >= -> _scl `i -> 110 `i 12  ]
-[; ;doprnt.c: 427: return _npowers_[scl/100+18] * _npowers_[(scl%100)/10+9] * _npowers_[scl%10];
-"427
-[e ) * * *U + &U __npowers_ * -> -> + / -> _scl `i -> 100 `i -> 18 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> + / % -> _scl `i -> 100 `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> % -> _scl `i -> 10 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 10  ]
-[e $U 13  ]
-"428
-[e :U 12 ]
-[; ;doprnt.c: 428: else if(scl > 10)
-[e $ ! > -> _scl `i -> 10 `i 14  ]
-[; ;doprnt.c: 429: return _npowers_[scl/10+9] * _npowers_[scl%10];
-"429
-[e ) * *U + &U __npowers_ * -> -> + / -> _scl `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux *U + &U __npowers_ * -> -> % -> _scl `i -> 10 `i `ui `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 10  ]
-[e :U 14 ]
-"430
-[e :U 13 ]
-[; ;doprnt.c: 430: return _npowers_[scl];
-[e ) *U + &U __npowers_ * -> -> _scl `uc `ux -> -> # *U &U __npowers_ `ui `ux ]
-[e $UE 10  ]
-"431
-}
-[e :U 11 ]
-[; ;doprnt.c: 431: }
-[; ;doprnt.c: 432: if(scl>=110)
-"432
-[e $ ! >= -> _scl `i -> 110 `i 15  ]
-[; ;doprnt.c: 433: return _powers_[scl/100+18] * _powers_[(scl%100)/10+9] * _powers_[scl%10];
-"433
-[e ) * * *U + &U __powers_ * -> -> + / -> _scl `i -> 100 `i -> 18 `i `ui `ux -> -> # *U &U __powers_ `ui `ux *U + &U __powers_ * -> -> + / % -> _scl `i -> 100 `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __powers_ `ui `ux *U + &U __powers_ * -> -> % -> _scl `i -> 10 `i `ui `ux -> -> # *U &U __powers_ `ui `ux ]
-[e $UE 10  ]
-[e $U 16  ]
-"434
-[e :U 15 ]
-[; ;doprnt.c: 434: else if(scl > 10)
-[e $ ! > -> _scl `i -> 10 `i 17  ]
-[; ;doprnt.c: 435: return _powers_[scl/10+9] * _powers_[scl%10];
-"435
-[e ) * *U + &U __powers_ * -> -> + / -> _scl `i -> 10 `i -> 9 `i `ui `ux -> -> # *U &U __powers_ `ui `ux *U + &U __powers_ * -> -> % -> _scl `i -> 10 `i `ui `ux -> -> # *U &U __powers_ `ui `ux ]
-[e $UE 10  ]
-[e :U 17 ]
-"436
-[e :U 16 ]
-[; ;doprnt.c: 436: return _powers_[scl];
-[e ) *U + &U __powers_ * -> -> _scl `uc `ux -> -> # *U &U __powers_ `ui `ux ]
-[e $UE 10  ]
-[; ;doprnt.c: 437: }
-"437
-[e :UE 10 ]
-}
 "488
 [v _sprintf `(i  1 e1v`*uc`*Cuc ]
 {
@@ -342,54 +219,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ap `*v  -> -> 1 `i `ux a ]
 "494
 [v _c `c  1 a ]
-"496
-[v _width `i  1 a ]
-"499
-[v _prec `i  1 a ]
+"501
+[v _prec `c  1 a ]
 "503
-[v _flag `us  1 a ]
-"510
-[v _d `uc  1 a ]
-"511
-[v _fval `d  1 a ]
-[v _integ `d  1 a ]
-"512
-[v _exp `i  1 a ]
-"513
-[v _ival `d  1 a ]
-"520
-[s S19 `*Cuc 1 `ui 1 ]
-[n S19 . _cp _len ]
-[u S18 `ul 1 `S19 1 ]
-[n S18 . _val _str ]
-[v __val `S18  1 a ]
+[v _flag `uc  1 a ]
+"528
+[s S7 `*Cuc 1 `ui 1 ]
+[n S7 . _cp _len ]
+[u S6 `ui 1 `S7 1 ]
+[n S6 . _val _str ]
+[v __val `S6  1 a ]
 [; ;doprnt.c: 489: va_list ap;
 [; ;doprnt.c: 494: signed char c;
-[; ;doprnt.c: 496: int width;
-[; ;doprnt.c: 499: int prec;
-[; ;doprnt.c: 503: unsigned short flag;
-[; ;doprnt.c: 510: char d;
-[; ;doprnt.c: 511: double fval, integ;
-[; ;doprnt.c: 512: int exp;
-[; ;doprnt.c: 513: double ival;
-[; ;doprnt.c: 514: union {
-[; ;doprnt.c: 515: unsigned long _val;
-[; ;doprnt.c: 516: struct {
-[; ;doprnt.c: 517: const char * _cp;
-[; ;doprnt.c: 518: unsigned _len;
-[; ;doprnt.c: 519: } _str;
-[; ;doprnt.c: 520: } _val;
+[; ;doprnt.c: 501: signed char prec;
+[; ;doprnt.c: 503: unsigned char flag;
+[; ;doprnt.c: 522: union {
+[; ;doprnt.c: 523: unsigned int _val;
+[; ;doprnt.c: 524: struct {
+[; ;doprnt.c: 525: const char * _cp;
+[; ;doprnt.c: 526: unsigned _len;
+[; ;doprnt.c: 527: } _str;
+[; ;doprnt.c: 528: } _val;
 [; ;doprnt.c: 537: *ap = __va_start();
 "537
 [e = *U &U _ap ( ___va_start ..  ]
 [; ;doprnt.c: 540: while(c = *f++) {
 "540
-[e $U 21  ]
-[e :U 22 ]
+[e $U 9  ]
+[e :U 10 ]
 {
 [; ;doprnt.c: 542: if(c != '%')
 "542
-[e $ ! != -> -> _c `i `ui -> 37 `ui 24  ]
+[e $ ! != -> -> _c `i `ui -> 37 `ui 12  ]
 [; ;doprnt.c: 544: {
 "544
 {
@@ -398,351 +259,151 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> _c `uc ]
 [; ;doprnt.c: 546: continue;
 "546
-[e $U 21  ]
+[e $U 9  ]
 "547
 }
-[e :U 24 ]
+[e :U 12 ]
 [; ;doprnt.c: 547: }
 [; ;doprnt.c: 552: flag = 0;
 "552
-[e = _flag -> -> 0 `i `us ]
+[e = _flag -> -> 0 `i `uc ]
 [; ;doprnt.c: 638: switch(c = *f++) {
 "638
-[e $U 26  ]
+[e $U 14  ]
 {
 [; ;doprnt.c: 640: case 0:
 "640
-[e :U 27 ]
+[e :U 15 ]
 [; ;doprnt.c: 641: goto alldone;
 "641
-[e $U 28  ]
-[; ;doprnt.c: 665: case 'f':
-"665
-[e :U 29 ]
-[; ;doprnt.c: 666: flag |= 0x400;
-"666
-[e =| _flag -> -> 1024 `i `us ]
-[; ;doprnt.c: 667: break;
-"667
-[e $U 25  ]
+[e $U 16  ]
+[; ;doprnt.c: 700: case 'd':
+"700
+[e :U 17 ]
+"701
+[e :U 18 ]
+[; ;doprnt.c: 701: case 'i':
+[; ;doprnt.c: 702: break;
+"702
+[e $U 13  ]
 [; ;doprnt.c: 805: default:
 "805
-[e :U 30 ]
+[e :U 19 ]
 [; ;doprnt.c: 816: continue;
 "816
-[e $U 21  ]
+[e $U 9  ]
 "825
 }
 [; ;doprnt.c: 825: }
-[e $U 25  ]
+[e $U 13  ]
 "638
-[e :U 26 ]
-[e [\ = _c -> *U ++ _f * -> -> 1 `i `x -> -> # *U _f `i `x `c , $ -> -> 0 `i `c 27
- , $ -> -> 102 `ui `c 29
- 30 ]
+[e :U 14 ]
+[e [\ = _c -> *U ++ _f * -> -> 1 `i `x -> -> # *U _f `i `x `c , $ -> -> 0 `i `c 15
+ , $ -> -> 100 `ui `c 17
+ , $ -> -> 105 `ui `c 18
+ 19 ]
 "825
-[e :U 25 ]
-[; ;doprnt.c: 828: if(flag & (0x700)) {
-"828
-[e $ ! != & -> _flag `ui -> -> 1792 `i `ui -> -> 0 `i `ui 31  ]
+[e :U 13 ]
+[; ;doprnt.c: 1248: {
+"1248
 {
-[; ;doprnt.c: 832: prec = 6;
-"832
-[e = _prec -> 6 `i ]
-[; ;doprnt.c: 833: fval = (*(double *)__va_arg((*(double **)ap), (double)0));
-"833
-[e = _fval *U -> ( ___va_arg , (. -> *U -> &U _ap `**d `*v -> -> 0 `i `d `*d ]
-[; ;doprnt.c: 834: if(fval < 0.0) {
-"834
-[e $ ! < _fval .0.0 32  ]
+[; ;doprnt.c: 1254: _val._val = (int)(*(int *)__va_arg((*(int **)ap), (int)0));
+"1254
+[e = . __val 0 -> *U -> ( ___va_arg , (. -> *U -> &U _ap `**i `*v -> 0 `i `*i `ui ]
+[; ;doprnt.c: 1256: if((int)_val._val < 0) {
+"1256
+[e $ ! < -> . __val 0 `i -> 0 `i 20  ]
 {
-[; ;doprnt.c: 835: fval = -fval;
-"835
-[e = _fval -U _fval ]
-[; ;doprnt.c: 836: flag |= 0x03;
-"836
-[e =| _flag -> -> 3 `i `us ]
-"837
+[; ;doprnt.c: 1257: flag |= 0x03;
+"1257
+[e =| _flag -> -> 3 `i `uc ]
+[; ;doprnt.c: 1258: _val._val = -_val._val;
+"1258
+[e = . __val 0 -U . __val 0 ]
+"1259
 }
-[e :U 32 ]
-[; ;doprnt.c: 837: }
-[; ;doprnt.c: 838: exp = 0;
-"838
-[e = _exp -> 0 `i ]
-[; ;doprnt.c: 839: if( fval!=0) {
-"839
-[e $ ! != _fval -> -> 0 `i `d 33  ]
-{
-[; ;doprnt.c: 840: (void)(*(&exp) = ((*(unsigned long *)&fval >> 15) & 255) - 126);
-"840
-[e = *U &U _exp -> - & >> *U -> &U _fval `*ul -> 15 `i -> -> -> 255 `i `l `ul -> -> -> 126 `i `l `ul `i ]
-[; ;doprnt.c: 841: exp--;
-"841
-[e -- _exp -> 1 `i ]
-[; ;doprnt.c: 842: exp *= 3;
-"842
-[e =* _exp -> 3 `i ]
-[; ;doprnt.c: 843: exp /= 10;
-"843
-[e =/ _exp -> -> 10 `uc `i ]
-[; ;doprnt.c: 844: if(exp < 0)
-"844
-[e $ ! < _exp -> 0 `i 34  ]
-[; ;doprnt.c: 845: exp--;
-"845
-[e -- _exp -> 1 `i ]
-[e :U 34 ]
-[; ;doprnt.c: 849: integ = scale(-exp);
-"849
-[e = _integ ( _scale (1 -> -U _exp `c ]
-[; ;doprnt.c: 850: integ *= fval;
-"850
-[e =* _integ _fval ]
-[; ;doprnt.c: 851: if(integ < 1.0)
-"851
-[e $ ! < _integ .1.0 35  ]
-[; ;doprnt.c: 852: exp--;
-"852
-[e -- _exp -> 1 `i ]
-[e $U 36  ]
-"853
-[e :U 35 ]
-[; ;doprnt.c: 853: else if(integ >= 10.0)
-[e $ ! >= _integ .10.0 37  ]
-[; ;doprnt.c: 854: exp++;
-"854
-[e ++ _exp -> 1 `i ]
-[e :U 37 ]
-"855
-[e :U 36 ]
+[e :U 20 ]
+"1261
 }
-[e :U 33 ]
-[; ;doprnt.c: 855: }
-[; ;doprnt.c: 1115: if(prec <= 12)
-"1115
-[e $ ! <= _prec -> 12 `i 38  ]
-[; ;doprnt.c: 1116: fval += fround(prec);
-"1116
-[e =+ _fval ( _fround (1 -> _prec `uc ]
-[e :U 38 ]
-[; ;doprnt.c: 1119: if((exp > 9)||(fval != 0 && (unsigned long)fval == 0 && exp > 1)) {
-"1119
-[e $ ! || > _exp -> 9 `i && && != _fval -> -> 0 `i `d == -> _fval `ul -> -> -> 0 `i `l `ul > _exp -> 1 `i 39  ]
-{
-[; ;doprnt.c: 1123: if(integ < 4.294967296){
-"1123
-[e $ ! < _integ .4.294967296 40  ]
-{
-[; ;doprnt.c: 1124: exp -= (sizeof dpowers/sizeof dpowers[0])-1;
-"1124
-[e =- _exp -> - / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui -> -> 1 `i `ui `i ]
-"1125
-}
-[; ;doprnt.c: 1125: }else{
-[e $U 41  ]
-[e :U 40 ]
-{
-[; ;doprnt.c: 1126: exp -= (sizeof dpowers/sizeof dpowers[0])-2;
-"1126
-[e =- _exp -> - / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui -> -> 2 `i `ui `i ]
-"1127
-}
-[e :U 41 ]
-[; ;doprnt.c: 1127: }
-[; ;doprnt.c: 1128: integ = scale(exp);
-"1128
-[e = _integ ( _scale (1 -> _exp `c ]
-[; ;doprnt.c: 1129: _val._val = ((sizeof(double)== 3) ? _tdiv_to_l_(fval,integ) : _div_to_l_(fval,integ));
-"1129
-[e = . __val 0 ? == -> # `d `ui -> -> 3 `i `ui : ( __tdiv_to_l_ (2 , -> _fval `f -> _integ `f ( __div_to_l_ (2 , _fval _integ ]
-[; ;doprnt.c: 1132: fval = 0.0;
-"1132
-[e = _fval .0.0 ]
-"1133
-}
-[; ;doprnt.c: 1133: } else {
-[e $U 42  ]
-[e :U 39 ]
-{
-[; ;doprnt.c: 1134: _val._val = (unsigned long)fval;
-"1134
-[e = . __val 0 -> _fval `ul ]
-[; ;doprnt.c: 1135: fval -= (double)_val._val;
-"1135
-[e =- _fval -> . __val 0 `d ]
-[; ;doprnt.c: 1136: exp = 0;
-"1136
-[e = _exp -> 0 `i ]
-"1137
-}
-[e :U 42 ]
-[; ;doprnt.c: 1137: }
-[; ;doprnt.c: 1139: for(c = 1 ; c != (sizeof dpowers/sizeof dpowers[0]) ; c++)
-"1139
+[; ;doprnt.c: 1259: }
+[; ;doprnt.c: 1261: }
+[; ;doprnt.c: 1300: for(c = 1 ; c != sizeof dpowers/sizeof dpowers[0] ; c++)
+"1300
 {
 [e = _c -> -> 1 `i `c ]
-[e $ != -> -> _c `i `ui / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui 43  ]
-[e $U 44  ]
-"1140
-[e :U 43 ]
-[; ;doprnt.c: 1140: if(_val._val < dpowers[c])
-[e $ ! < . __val 0 *U + &U _dpowers * -> -> _c `uc `ux -> -> # *U &U _dpowers `ui `ux 46  ]
-[; ;doprnt.c: 1141: break;
-"1141
-[e $U 44  ]
-[e :U 46 ]
-"1139
+[e $ != -> -> _c `i `ui / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui 21  ]
+[e $U 22  ]
+"1301
+[e :U 21 ]
+[; ;doprnt.c: 1301: if(_val._val < dpowers[c])
+[e $ ! < . __val 0 *U + &U _dpowers * -> -> _c `uc `ux -> -> # *U &U _dpowers `ui `ux 24  ]
+[; ;doprnt.c: 1302: break;
+"1302
+[e $U 22  ]
+[e :U 24 ]
+"1300
 [e ++ _c -> -> 1 `i `c ]
-[e $ != -> -> _c `i `ui / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui 43  ]
-[e :U 44 ]
-"1176
-}
-[; ;doprnt.c: 1176: {
-{
-[; ;doprnt.c: 1189: if(flag & 0x03)
-"1189
-[e $ ! != & -> _flag `ui -> -> 3 `i `ui -> -> 0 `i `ui 47  ]
-[; ;doprnt.c: 1191: ((*sp++ = ('-')));
-"1191
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> -> 45 `ui `uc ]
-[e :U 47 ]
-"1196
-}
-[; ;doprnt.c: 1196: }
-[; ;doprnt.c: 1197: while(c--) {
-"1197
-[e $U 48  ]
-[e :U 49 ]
-{
-[; ;doprnt.c: 1201: ((*sp++ = ('0' + (_val._val/dpowers[c])%10)));
-"1201
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> + -> -> 48 `ui `ul % / . __val 0 *U + &U _dpowers * -> -> _c `uc `ux -> -> # *U &U _dpowers `ui `ux -> -> -> 10 `i `l `ul `uc ]
-"1203
-}
-[e :U 48 ]
-"1197
-[e $ != -> -- _c -> -> 1 `i `c `i -> -> -> 0 `i `c `i 49  ]
-[e :U 50 ]
-[; ;doprnt.c: 1203: }
-[; ;doprnt.c: 1204: while(exp > 0) {
-"1204
-[e $U 51  ]
-[e :U 52 ]
-{
-[; ;doprnt.c: 1205: ((*sp++ = ('0')));
-"1205
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> -> 48 `ui `uc ]
-[; ;doprnt.c: 1206: exp--;
-"1206
-[e -- _exp -> 1 `i ]
-"1207
-}
-[e :U 51 ]
-"1204
-[e $ > _exp -> 0 `i 52  ]
-[e :U 53 ]
-[; ;doprnt.c: 1207: }
-[; ;doprnt.c: 1208: if(prec > (int)((sizeof dpowers/sizeof dpowers[0])-2))
-"1208
-[e $ ! > _prec -> - / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui -> -> 2 `i `ui `i 54  ]
-[; ;doprnt.c: 1209: c = (sizeof dpowers/sizeof dpowers[0])-2;
-"1209
-[e = _c -> - / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui -> -> 2 `i `ui `c ]
-[e $U 55  ]
-"1210
-[e :U 54 ]
-[; ;doprnt.c: 1210: else
-[; ;doprnt.c: 1211: c = prec;
-"1211
-[e = _c -> _prec `c ]
-[e :U 55 ]
-[; ;doprnt.c: 1212: prec -= c;
-"1212
-[e =- _prec -> _c `i ]
-[; ;doprnt.c: 1216: if(c)
-"1216
-[e $ ! != -> _c `i -> -> -> 0 `i `c `i 56  ]
-[; ;doprnt.c: 1218: ((*sp++ = ('.')));
-"1218
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> -> 46 `ui `uc ]
-[e :U 56 ]
-[; ;doprnt.c: 1224: _val._val = (long)(fval * scale(c));
-"1224
-[e = . __val 0 -> -> * _fval ( _scale (1 _c `l `ul ]
-[; ;doprnt.c: 1225: while(c--) {
-"1225
-[e $U 57  ]
-[e :U 58 ]
-{
-[; ;doprnt.c: 1226: ((*sp++ = ('0' + (_val._val/dpowers[c])%10)));
-"1226
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> + -> -> 48 `ui `ul % / . __val 0 *U + &U _dpowers * -> -> _c `uc `ux -> -> # *U &U _dpowers `ui `ux -> -> -> 10 `i `l `ul `uc ]
-[; ;doprnt.c: 1227: _val._val %= dpowers[c];
-"1227
-[e =% . __val 0 *U + &U _dpowers * -> -> _c `uc `ux -> -> # *U &U _dpowers `ui `ux ]
-"1228
-}
-[e :U 57 ]
-"1225
-[e $ != -> -- _c -> -> 1 `i `c `i -> -> -> 0 `i `c `i 58  ]
-[e :U 59 ]
-[; ;doprnt.c: 1228: }
-[; ;doprnt.c: 1230: while(prec) {
-"1230
-[e $U 60  ]
-[e :U 61 ]
-{
-[; ;doprnt.c: 1231: ((*sp++ = ('0')));
-"1231
-[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> -> 48 `ui `uc ]
-[; ;doprnt.c: 1232: prec--;
-"1232
-[e -- _prec -> 1 `i ]
-"1233
-}
-[e :U 60 ]
-"1230
-[e $ != _prec -> 0 `i 61  ]
-[e :U 62 ]
-[; ;doprnt.c: 1233: }
-[; ;doprnt.c: 1240: continue;
-"1240
-[e $U 21  ]
-"1241
-}
-[e :U 31 ]
-[; ;doprnt.c: 1241: }
-[; ;doprnt.c: 1417: {
+[e $ != -> -> _c `i `ui / -> # _dpowers `ui -> # *U + &U _dpowers * -> -> -> 0 `i `ui `ux -> -> # *U &U _dpowers `ui `ux `ui 21  ]
+[e :U 22 ]
 "1417
+}
+[; ;doprnt.c: 1417: {
 {
 [; ;doprnt.c: 1433: if(flag & 0x03)
 "1433
-[e $ ! != & -> _flag `ui -> -> 3 `i `ui -> -> 0 `i `ui 63  ]
+[e $ ! != & -> _flag `i -> 3 `i -> 0 `i 25  ]
 [; ;doprnt.c: 1434: ((*sp++ = ('-')));
 "1434
 [e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> -> 45 `ui `uc ]
-[e :U 63 ]
+[e :U 25 ]
 "1464
 }
+[; ;doprnt.c: 1464: }
+[; ;doprnt.c: 1467: prec = c;
+"1467
+[e = _prec _c ]
+[; ;doprnt.c: 1469: while(prec--) {
+"1469
+[e $U 26  ]
+[e :U 27 ]
+{
+[; ;doprnt.c: 1473: {
+"1473
+{
+[; ;doprnt.c: 1484: c = (_val._val / dpowers[prec]) % 10 + '0';
+"1484
+[e = _c -> + % / . __val 0 *U + &U _dpowers * -> -> _prec `uc `ux -> -> # *U &U _dpowers `ui `ux -> -> 10 `i `ui -> 48 `ui `c ]
+"1515
+}
+[; ;doprnt.c: 1515: }
+[; ;doprnt.c: 1516: ((*sp++ = (c)));
+"1516
+[e = *U ++ _sp * -> -> 1 `i `x -> -> # *U _sp `i `x -> _c `uc ]
+"1517
+}
+[e :U 26 ]
+"1469
+[e $ != -> -- _prec -> -> 1 `i `c `i -> -> -> 0 `i `c `i 27  ]
+[e :U 28 ]
 "1525
 }
-[e :U 21 ]
+[e :U 9 ]
 "540
-[e $ != -> = _c -> *U ++ _f * -> -> 1 `i `x -> -> # *U _f `i `x `c `i -> -> -> 0 `i `c `i 22  ]
-[e :U 23 ]
-[; ;doprnt.c: 1464: }
+[e $ != -> = _c -> *U ++ _f * -> -> 1 `i `x -> -> # *U _f `i `x `c `i -> -> -> 0 `i `c `i 10  ]
+[e :U 11 ]
+[; ;doprnt.c: 1517: }
 [; ;doprnt.c: 1525: }
 [; ;doprnt.c: 1527: alldone:
 "1527
-[e :U 28 ]
+[e :U 16 ]
 [; ;doprnt.c: 1530: *sp = 0;
 "1530
 [e = *U _sp -> -> 0 `i `uc ]
 [; ;doprnt.c: 1532: return 0;
 "1532
 [e ) -> 0 `i ]
-[e $UE 20  ]
+[e $UE 8  ]
 [; ;doprnt.c: 1533: }
 "1533
-[e :UE 20 ]
+[e :UE 8 ]
 }

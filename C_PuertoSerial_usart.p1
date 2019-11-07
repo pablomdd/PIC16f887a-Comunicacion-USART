@@ -1332,7 +1332,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _gets_Serial `(v  0 ef1`*uc ]
 "206 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h
 [v _sprintf `(i  0 e1v`*uc`*Cuc ]
-[p f _sprintf 8396800 ]
+"33 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _atoi `(i  0 ef1`*Cuc ]
+[p f _sprintf 8388736 ]
 [; ;pic16f887.h: 118: volatile unsigned char INDF @ 0x000;
 [; ;pic16f887.h: 122: volatile unsigned char TMR0 @ 0x001;
 [; ;pic16f887.h: 126: volatile unsigned char PCL @ 0x002;
@@ -3014,186 +3016,192 @@ Version 3.2 HI-TECH Software Intermediate Code
 "177
 [e :U 167 ]
 {
-[; ;C_PuertoSerial_usart.c: 178: lcd_clear();
 "178
-[e ( _lcd_clear ..  ]
-[; ;C_PuertoSerial_usart.c: 180: ADCON0=0b11010101;
+[v _val `i  1 a ]
+[; ;C_PuertoSerial_usart.c: 178: int val;
+[; ;C_PuertoSerial_usart.c: 180: lcd_clear();
 "180
-[e = _ADCON0 -> -> 213 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 181: GO_DONE = 1;
-"181
-[e = _GO_DONE -> -> 1 `i `b ]
-[; ;C_PuertoSerial_usart.c: 182: while (GO_DONE ==1);
+[e ( _lcd_clear ..  ]
+[; ;C_PuertoSerial_usart.c: 182: ADCON0=0b11010101;
 "182
+[e = _ADCON0 -> -> 213 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 183: GO_DONE = 1;
+"183
+[e = _GO_DONE -> -> 1 `i `b ]
+[; ;C_PuertoSerial_usart.c: 184: while (GO_DONE ==1);
+"184
 [e $U 169  ]
 [e :U 170 ]
 [e :U 169 ]
 [e $ == -> _GO_DONE `i -> 1 `i 170  ]
 [e :U 171 ]
-[; ;C_PuertoSerial_usart.c: 183: nin=(ADRESH<<2)|(ADRESL>>6);
-"183
+[; ;C_PuertoSerial_usart.c: 185: nin=(ADRESH<<2)|(ADRESL>>6);
+"185
 [e = _nin | << -> _ADRESH `i -> 2 `i >> -> _ADRESL `i -> 6 `i ]
-[; ;C_PuertoSerial_usart.c: 184: CCPR1L=ADRESH;
-"184
-[e = _CCPR1L _ADRESH ]
-[; ;C_PuertoSerial_usart.c: 186: num= num1*nin;
+[; ;C_PuertoSerial_usart.c: 186: CCPR1L=ADRESH;
 "186
+[e = _CCPR1L _ADRESH ]
+[; ;C_PuertoSerial_usart.c: 188: num = num1*nin;
+"188
 [e = _num * _num1 -> _nin `f ]
-"187
-[v _num_f `i  1 a ]
-[; ;C_PuertoSerial_usart.c: 187: int num_f = 255;
-[e = _num_f -> 255 `i ]
-[; ;C_PuertoSerial_usart.c: 189: sprintf(buffer,"El valor es: %f  ", num);
 "189
-[e ( _sprintf (1 , (. , &U _buffer :s 1C -> _num `d ]
-[; ;C_PuertoSerial_usart.c: 192: for (char x = 0; x<17; x++)
-"192
+[v _num_f `i  1 a ]
+[; ;C_PuertoSerial_usart.c: 189: int num_f = 255;
+[e = _num_f -> 255 `i ]
+[; ;C_PuertoSerial_usart.c: 191: sprintf(buffer,"El valor es:%i  ", nin);
+"191
+[e ( _sprintf (1 , (. , &U _buffer :s 1C _nin ]
+[; ;C_PuertoSerial_usart.c: 194: for (char x = 0; x<17; x++)
+"194
 {
 [v _x `uc  1 a ]
 [e = _x -> -> 0 `i `uc ]
 [e $ < -> _x `i -> 17 `i 172  ]
 [e $U 173  ]
-"193
-[e :U 172 ]
-[; ;C_PuertoSerial_usart.c: 193: {
-{
-[; ;C_PuertoSerial_usart.c: 194: putch (buffer[x]);
-"194
-[e ( _putch (1 *U + &U _buffer * -> _x `ux -> -> # *U &U _buffer `ui `ux ]
 "195
+[e :U 172 ]
+[; ;C_PuertoSerial_usart.c: 195: {
+{
+[; ;C_PuertoSerial_usart.c: 196: putch (buffer[x]);
+"196
+[e ( _putch (1 *U + &U _buffer * -> _x `ux -> -> # *U &U _buffer `ui `ux ]
+"197
 }
-"192
+"194
 [e ++ _x -> -> 1 `i `uc ]
 [e $ < -> _x `i -> 17 `i 172  ]
 [e :U 173 ]
-"195
+"197
 }
-[; ;C_PuertoSerial_usart.c: 195: }
-[; ;C_PuertoSerial_usart.c: 196: pause(200);
-"196
-[e ( _pause (1 -> -> 200 `i `us ]
-[; ;C_PuertoSerial_usart.c: 198: putch(0x0D);
+[; ;C_PuertoSerial_usart.c: 197: }
+[; ;C_PuertoSerial_usart.c: 198: pause(200);
 "198
+[e ( _pause (1 -> -> 200 `i `us ]
+[; ;C_PuertoSerial_usart.c: 200: putch(0x0D);
+"200
 [e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 199: putch(0x0A);
-"199
+[; ;C_PuertoSerial_usart.c: 201: putch(0x0A);
+"201
 [e ( _putch (1 -> -> 10 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 202: gets_Serial(&input);
-"202
+[; ;C_PuertoSerial_usart.c: 204: gets_Serial(&input);
+"204
 [e ( _gets_Serial (1 &U _input ]
-[; ;C_PuertoSerial_usart.c: 205: for (char x = 0; x<15; x++)
-"205
+[; ;C_PuertoSerial_usart.c: 207: for (char x = 0; x<15; x++)
+"207
 {
 [v _x `uc  1 a ]
 [e = _x -> -> 0 `i `uc ]
 [e $ < -> _x `i -> 15 `i 175  ]
 [e $U 176  ]
-"206
-[e :U 175 ]
-[; ;C_PuertoSerial_usart.c: 206: {
-{
-[; ;C_PuertoSerial_usart.c: 207: putch (input[x]);
-"207
-[e ( _putch (1 *U + &U _input * -> _x `ux -> -> # *U &U _input `ui `ux ]
 "208
+[e :U 175 ]
+[; ;C_PuertoSerial_usart.c: 208: {
+{
+[; ;C_PuertoSerial_usart.c: 209: putch (input[x]);
+"209
+[e ( _putch (1 *U + &U _input * -> _x `ux -> -> # *U &U _input `ui `ux ]
+"210
 }
-"205
+"207
 [e ++ _x -> -> 1 `i `uc ]
 [e $ < -> _x `i -> 15 `i 175  ]
 [e :U 176 ]
-"208
+"210
 }
-[; ;C_PuertoSerial_usart.c: 208: }
-[; ;C_PuertoSerial_usart.c: 209: pause(200);
-"209
+[; ;C_PuertoSerial_usart.c: 210: }
+[; ;C_PuertoSerial_usart.c: 211: pause(200);
+"211
 [e ( _pause (1 -> -> 200 `i `us ]
-[; ;C_PuertoSerial_usart.c: 212: lcd_goto(0);
-"212
-[e ( _lcd_goto (1 -> -> 0 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 213: lcd_puts(input);
-"213
-[e ( _lcd_puts (1 -> &U _input `*Cuc ]
-[; ;C_PuertoSerial_usart.c: 214: lcd_goto(0x40);
-"214
-[e ( _lcd_goto (1 -> -> 64 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 215: lcd_puts(buffer);
+[; ;C_PuertoSerial_usart.c: 215: PORTB = atoi(input);
 "215
-[e ( _lcd_puts (1 -> &U _buffer `*Cuc ]
-[; ;C_PuertoSerial_usart.c: 217: pause(2000);
-"217
-[e ( _pause (1 -> -> 2000 `i `us ]
-[; ;C_PuertoSerial_usart.c: 219: putch(0x0D);
+[e = _PORTB -> ( _atoi (1 -> &U _input `*Cuc `uc ]
+[; ;C_PuertoSerial_usart.c: 218: lcd_goto(0);
+"218
+[e ( _lcd_goto (1 -> -> 0 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 219: lcd_puts(input);
 "219
-[e ( _putch (1 -> -> 13 `i `uc ]
-[; ;C_PuertoSerial_usart.c: 220: putch(0x0A);
+[e ( _lcd_puts (1 -> &U _input `*Cuc ]
+[; ;C_PuertoSerial_usart.c: 220: lcd_goto(0x40);
 "220
+[e ( _lcd_goto (1 -> -> 64 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 221: lcd_puts(val);
+"221
+[e ( _lcd_puts (1 -> _val `*Cuc ]
+[; ;C_PuertoSerial_usart.c: 223: pause(2000);
+"223
+[e ( _pause (1 -> -> 2000 `i `us ]
+[; ;C_PuertoSerial_usart.c: 225: putch(0x0D);
+"225
+[e ( _putch (1 -> -> 13 `i `uc ]
+[; ;C_PuertoSerial_usart.c: 226: putch(0x0A);
+"226
 [e ( _putch (1 -> -> 10 `i `uc ]
-"222
+"228
 }
 [e :U 166 ]
 "177
 [e $U 167  ]
 [e :U 168 ]
-[; ;C_PuertoSerial_usart.c: 222: }
-[; ;C_PuertoSerial_usart.c: 225: }
-"225
+[; ;C_PuertoSerial_usart.c: 228: }
+[; ;C_PuertoSerial_usart.c: 229: }
+"229
 [e :UE 159 ]
 }
-"229
+"233
 [v _putch `(v  1 ef1`uc ]
 {
-[; ;C_PuertoSerial_usart.c: 228: void putch(char dato)
-[; ;C_PuertoSerial_usart.c: 229: {
+[; ;C_PuertoSerial_usart.c: 232: void putch(char dato)
+[; ;C_PuertoSerial_usart.c: 233: {
 [e :U _putch ]
 [v _dato `uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 230: while(!TXIF) continue;
-"230
+[; ;C_PuertoSerial_usart.c: 234: while(!TXIF) continue;
+"234
 [e $U 179  ]
 [e :U 180 ]
 [e $U 179  ]
 [e :U 179 ]
 [e $ ! _TXIF 180  ]
 [e :U 181 ]
-[; ;C_PuertoSerial_usart.c: 231: TXREG=dato;
-"231
+[; ;C_PuertoSerial_usart.c: 235: TXREG=dato;
+"235
 [e = _TXREG _dato ]
-[; ;C_PuertoSerial_usart.c: 232: }
-"232
+[; ;C_PuertoSerial_usart.c: 236: }
+"236
 [e :UE 178 ]
 }
-"235
+"239
 [v _getch `(uc  1 ef ]
 {
-[; ;C_PuertoSerial_usart.c: 234: char getch()
-[; ;C_PuertoSerial_usart.c: 235: {
+[; ;C_PuertoSerial_usart.c: 238: char getch()
+[; ;C_PuertoSerial_usart.c: 239: {
 [e :U _getch ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 236: while(!RCIF) continue;
-"236
+[; ;C_PuertoSerial_usart.c: 240: while(!RCIF) continue;
+"240
 [e $U 183  ]
 [e :U 184 ]
 [e $U 183  ]
 [e :U 183 ]
 [e $ ! _RCIF 184  ]
 [e :U 185 ]
-[; ;C_PuertoSerial_usart.c: 237: return RCREG;
-"237
+[; ;C_PuertoSerial_usart.c: 241: return RCREG;
+"241
 [e ) _RCREG ]
 [e $UE 182  ]
-[; ;C_PuertoSerial_usart.c: 238: }
-"238
+[; ;C_PuertoSerial_usart.c: 242: }
+"242
 [e :UE 182 ]
 }
-"240
+"244
 [v _gets_Serial `(v  1 ef1`*uc ]
 {
-[; ;C_PuertoSerial_usart.c: 240: void gets_Serial( char * s){
+[; ;C_PuertoSerial_usart.c: 244: void gets_Serial( char * s){
 [e :U _gets_Serial ]
 [v _s `*uc  1 r1 ]
 [f ]
-[; ;C_PuertoSerial_usart.c: 242: for(int i=0; i<=16; i++) *(s+i)=0;
-"242
+[; ;C_PuertoSerial_usart.c: 246: for(int i=0; i<=16; i++) *(s+i)=0;
+"246
 {
 [v _i `i  1 a ]
 [e = _i -> 0 `i ]
@@ -3205,8 +3213,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $ <= _i -> 16 `i 187  ]
 [e :U 188 ]
 }
-[; ;C_PuertoSerial_usart.c: 243: for(int i=0; i<16; i++){
-"243
+[; ;C_PuertoSerial_usart.c: 247: for(int i=0; i<16; i++){
+"247
 {
 [v _i `i  1 a ]
 [e = _i -> 0 `i ]
@@ -3214,30 +3222,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e $U 191  ]
 [e :U 190 ]
 {
-"244
+"248
 [v _c `uc  1 a ]
-[; ;C_PuertoSerial_usart.c: 244: char c=getch();
+[; ;C_PuertoSerial_usart.c: 248: char c=getch();
 [e = _c ( _getch ..  ]
-[; ;C_PuertoSerial_usart.c: 246: if(c==10 | c==13) break;
-"246
+[; ;C_PuertoSerial_usart.c: 250: if(c==10 | c==13) break;
+"250
 [e $ ! | == -> _c `i -> 10 `i == -> _c `i -> 13 `i 193  ]
 [e $U 191  ]
 [e :U 193 ]
-[; ;C_PuertoSerial_usart.c: 247: *(s+i)=c;
-"247
+[; ;C_PuertoSerial_usart.c: 251: *(s+i)=c;
+"251
 [e = *U + _s * -> _i `x -> -> # *U _s `i `x _c ]
-"248
+"252
 }
-"243
+"247
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 16 `i 190  ]
 [e :U 191 ]
-"248
+"252
 }
-[; ;C_PuertoSerial_usart.c: 248: }
-[; ;C_PuertoSerial_usart.c: 250: }
-"250
+[; ;C_PuertoSerial_usart.c: 252: }
+[; ;C_PuertoSerial_usart.c: 254: }
+"254
 [e :UE 186 ]
 }
-[a 1C 69 108 32 118 97 108 111 114 32 101 115 58 32 37 102 32 32 0 ]
+[a 1C 69 108 32 118 97 108 111 114 32 101 115 58 37 105 32 32 0 ]
 

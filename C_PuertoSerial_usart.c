@@ -175,6 +175,8 @@ void main(){
 	gets_Serial(&buffer);
 	
 	while(1){
+		int val;
+		
 		lcd_clear();
 		//LECTURA DEL PWM
 		ADCON0=0b11010101;
@@ -183,10 +185,10 @@ void main(){
 		nin=(ADRESH<<2)|(ADRESL>>6);
 		CCPR1L=ADRESH;
 
-		num= num1*nin;
+		num = num1*nin;
 		int num_f = 255;
 
-		sprintf(buffer,"El valor es: %f  ", num);
+		sprintf(buffer,"El valor es:%i  ", nin);
 		
 	//	Muestra en Terminal el valor leído desde el PIC
 		for (char x = 0; x<17; x++)
@@ -200,19 +202,23 @@ void main(){
 		
 		//Obtiene String desde la terminal
 		gets_Serial(&input);
-
+		
 		//Muestra en pantalla el mensaje escrito
 		for (char x = 0; x<15; x++)
 			{
 			putch (input[x]);
 			}
 		pause(200);
-
+		
+		//sscanf(input,"%i ", val);
+		//val= atoi(input);
+		PORTB = atoi(input);
+		
 		//Imprime en LCD 
 		lcd_goto(0);
 		lcd_puts(input);
 		lcd_goto(0x40);
-		lcd_puts(buffer);
+		lcd_puts(val);
 		//esta pausa es para que el LCD muestre el mensaje
 		pause(2000);
 	

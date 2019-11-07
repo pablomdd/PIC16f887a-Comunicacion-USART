@@ -1795,6 +1795,8 @@ pause(1000);
 gets_Serial(&buffer);
 
 while(1){
+int val;
+
 lcd_clear();
 
 ADCON0=0b11010101;
@@ -1803,10 +1805,10 @@ while (GO_DONE ==1);
 nin=(ADRESH<<2)|(ADRESL>>6);
 CCPR1L=ADRESH;
 
-num= num1*nin;
+num = num1*nin;
 int num_f = 255;
 
-sprintf(buffer,"El valor es: %f  ", num);
+sprintf(buffer,"El valor es:%i  ", nin);
 
 
 for (char x = 0; x<17; x++)
@@ -1829,10 +1831,14 @@ putch (input[x]);
 pause(200);
 
 
+
+PORTB = atoi(input);
+
+
 lcd_goto(0);
 lcd_puts(input);
 lcd_goto(0x40);
-lcd_puts(buffer);
+lcd_puts(val);
 
 pause(2000);
 
@@ -1840,8 +1846,6 @@ putch(0x0D);
 putch(0x0A);
 
 }
-
-
 }
 
 

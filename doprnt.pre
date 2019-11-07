@@ -260,54 +260,10 @@ extern double trunc(double);
 extern double round(double);
 
 # 350 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c"
-const static unsigned long dpowers[] = {1, 10, 100, 1000, 10000,
+const static unsigned int dpowers[] = {1, 10, 100, 1000, 10000,
 
-100000, 1000000, 10000000, 100000000,
-1000000000
-
+# 355
 };
-
-# 384
-extern const double _powers_[], _npowers_[];
-
-
-
-extern unsigned long _div_to_l_(double, double);
-
-extern unsigned long _tdiv_to_l_(float, float);
-
-# 404
-static double
-fround(unsigned char prec)
-{
-
-
-if(prec>=110)
-return 0.5 * _npowers_[prec/100+18] * _npowers_[(prec%100)/10+9] * _npowers_[prec%10];
-else if(prec > 10)
-return 0.5 * _npowers_[prec/10+9] * _npowers_[prec%10];
-return 0.5 * _npowers_[prec];
-}
-
-# 420
-static double
-scale(signed char scl)
-{
-
-if(scl < 0) {
-scl = -scl;
-if(scl>=110)
-return _npowers_[scl/100+18] * _npowers_[(scl%100)/10+9] * _npowers_[scl%10];
-else if(scl > 10)
-return _npowers_[scl/10+9] * _npowers_[scl%10];
-return _npowers_[scl];
-}
-if(scl>=110)
-return _powers_[scl/100+18] * _powers_[(scl%100)/10+9] * _powers_[scl%10];
-else if(scl > 10)
-return _powers_[scl/10+9] * _powers_[scl%10];
-return _powers_[scl];
-}
 
 # 451
 int
@@ -322,21 +278,14 @@ va_list ap;
 
 signed char c;
 
-int width;
+# 501
+signed char prec;
 
+unsigned char flag;
 
-int prec;
-
-# 503
-unsigned short flag;
-
-# 510
-char d;
-double fval, integ;
-int exp;
-double ival;
+# 522
 union {
-unsigned long _val;
+unsigned int _val;
 struct {
 const char * _cp;
 unsigned _len;
@@ -365,9 +314,9 @@ switch(c = *f++) {
 case 0:
 goto alldone;
 
-# 665
-case 'f':
-flag |= 0x400;
+# 700
+case 'd':
+case 'i':
 break;
 
 # 805
@@ -379,112 +328,23 @@ continue;
 # 825
 }
 
-
-if(flag & (0x700)) {
-
-# 832
-prec = 6;
-fval = (*(double *)__va_arg((*(double **)ap), (double)0));
-if(fval < 0.0) {
-fval = -fval;
-flag |= 0x03;
-}
-exp = 0;
-if( fval!=0) {
-(void)(*(&exp) = ((*(unsigned long *)&fval >> 15) & 255) - 126);
-exp--;
-exp *= 3;
-exp /= 10;
-if(exp < 0)
-exp--;
-
-
-
-integ = scale(-exp);
-integ *= fval;
-if(integ < 1.0)
-exp--;
-else if(integ >= 10.0)
-exp++;
-}
-
-# 1115
-if(prec <= 12)
-fval += fround(prec);
-
-
-if((exp > 9)||(fval != 0 && (unsigned long)fval == 0 && exp > 1)) {
-
-
-
-if(integ < 4.294967296){
-exp -= (sizeof dpowers/sizeof dpowers[0])-1;
-}else{
-exp -= (sizeof dpowers/sizeof dpowers[0])-2;
-}
-integ = scale(exp);
-_val._val = ((sizeof(double)== 3) ? _tdiv_to_l_(fval,integ) : _div_to_l_(fval,integ));
-
-
-fval = 0.0;
-} else {
-_val._val = (unsigned long)fval;
-fval -= (double)_val._val;
-exp = 0;
-}
-
-for(c = 1 ; c != (sizeof dpowers/sizeof dpowers[0]) ; c++)
-if(_val._val < dpowers[c])
-break;
-
-# 1176
+# 1248
 {
 
-# 1189
-if(flag & 0x03)
+# 1254
+_val._val = (int)(*(int *)__va_arg((*(int **)ap), (int)0));
 
-((*sp++ = ('-')));
-
-# 1196
-}
-while(c--) {
-
-
-
-((*sp++ = ('0' + (_val._val/dpowers[c])%10)));
-
-}
-while(exp > 0) {
-((*sp++ = ('0')));
-exp--;
-}
-if(prec > (int)((sizeof dpowers/sizeof dpowers[0])-2))
-c = (sizeof dpowers/sizeof dpowers[0])-2;
-else
-c = prec;
-prec -= c;
-
-
-
-if(c)
-
-((*sp++ = ('.')));
-
-# 1224
-_val._val = (long)(fval * scale(c));
-while(c--) {
-((*sp++ = ('0' + (_val._val/dpowers[c])%10)));
-_val._val %= dpowers[c];
+if((int)_val._val < 0) {
+flag |= 0x03;
+_val._val = -_val._val;
 }
 
-while(prec) {
-((*sp++ = ('0')));
-prec--;
 }
 
-# 1240
-continue;
-}
+# 1300
+for(c = 1 ; c != sizeof dpowers/sizeof dpowers[0] ; c++)
+if(_val._val < dpowers[c])
+break;
 
 # 1417
 {
@@ -494,6 +354,22 @@ if(flag & 0x03)
 ((*sp++ = ('-')));
 
 # 1464
+}
+
+
+prec = c;
+
+while(prec--) {
+
+# 1473
+{
+
+# 1484
+c = (_val._val / dpowers[prec]) % 10 + '0';
+
+# 1515
+}
+((*sp++ = (c)));
 }
 
 # 1525
