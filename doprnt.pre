@@ -319,6 +319,21 @@ case 'd':
 case 'i':
 break;
 
+# 731
+case 's':
+
+# 737
+_val._str._cp = (*(const char * *)__va_arg((*(const char * **)ap), (const char *)0));
+
+# 743
+if(!_val._str._cp)
+_val._str._cp = "(null)";
+
+# 780
+while(*_val._str._cp)
+((*sp++ = (*_val._str._cp++)));
+continue;
+
 # 805
 default:
 

@@ -35,9 +35,9 @@ int  atoi( const char * s );
 
 //LCD CONFIG
 
-#define LCD_RS RA7
+#define LCD_RS RD7
 #define LCD_RW RE1
-#define LCD_EN RA6
+#define LCD_EN RD6
 
 #define LCD_DATA PORTD
 #define LCD_STROBE()  ((LCD_EN=1),(LCD_EN=0))
@@ -92,12 +92,15 @@ void lcd_goto(unsigned char pos)
 }
 
 void main(){
-    ANSEL=0x00; 
+    ANSEL=0x60; 
     ANSELH=0x00; 
    // INTCON=0x00; 
-    TRISA = 0x00;		//nible menos significativo de PORTA como entrada. 
+    TRISA = 0xFF;		//nible menos significativo de PORTA como entrada. 
+	
     TRISB = 0x00;       //PORTB como salida (RE y RS)
+	TRISC = 0x00;
     TRISD = 0x00;       //PORTD como salida (pines data de la LCD)
+	TRISE = 0x03;
 
 //ADC CONFIG    
 	TRISE=0x03;
@@ -142,7 +145,7 @@ void main(){
     pause(500); 
    
 
-	 PORTA=0x01;
+	 //PORTA=0x01;
     *pa=0xFF;
 
 
@@ -150,7 +153,18 @@ void main(){
 	char char_recibido;
 	char char_pwm;
 	char buffer[15];
-    
+
+	int entrada = 0;
+
+//pwm
+CCPR1L 	= 0x80;
+CCP1CON	= 0x0C;
+
+TMR2ON	= 1;
+
+  unsigned int pwm_1 = 0;
+
+
 	//numeros
     unsigned char pos=0; 
     for(int i=48; i<58; i++){
@@ -166,7 +180,7 @@ void main(){
     }
     putch(0x0D); 
     putch(0x0A); 
-    PORTA=0x00; 
+    //PORTA=0x00; 
     pause(1000); 
 
 
@@ -179,16 +193,16 @@ void main(){
 		
 		lcd_clear();
 		//LECTURA DEL PWM
-		ADCON0=0b11010101;
+		ADCON0=0xD5;
 		GO_DONE = 1;
 		while (GO_DONE ==1);
 		nin=(ADRESH<<2)|(ADRESL>>6);
-		CCPR1L=ADRESH;
+		//CCPR1L=ADRESH;
 
 		num = num1*nin;
 		int num_f = 255;
 
-		sprintf(buffer,"El valor es:%i  ", nin);
+		sprintf(buffer,"ADC es:%i  ", nin);
 		
 	//	Muestra en Terminal el valor leído desde el PIC
 		for (char x = 0; x<17; x++)
@@ -200,27 +214,76 @@ void main(){
 		putch(0x0D); 
 	    putch(0x0A); 
 		
+		//Valor de PORTA
+		
+		//entrada = PORTA;
+		sprintf(buffer,"PORTA es:%d ", PORTA);
+		
+	//	Muestra en Terminal el valor leído desde el PIC
+		for (char x = 0; x<12; x++)
+			{
+			putch (buffer[x]);
+			}
+		pause(200);
+	//	Retorno de Carro, Salto de línea en hex ASCII		
+		putch(0x0D); 
+	    putch(0x0A); 
+		
+
+
 		//Obtiene String desde la terminal
 		gets_Serial(&input);
 		
-		//Muestra en pantalla el mensaje escrito
+		sprintf(buffer,"PORTB: %s  ", input);
+		
+	//	Muestra en Terminal el valor leído desde el PIC
 		for (char x = 0; x<15; x++)
 			{
-			putch (input[x]);
+			putch (buffer[x]);
 			}
 		pause(200);
+	//	Retorno de Carro, Salto de línea en hex ASCII		
+		putch(0x0D); 
+	    putch(0x0A); 
 		
 		//sscanf(input,"%i ", val);
 		//val= atoi(input);
 		PORTB = atoi(input);
 		
+
+//PWM
+		//Obtiene String desde la terminal
+		gets_Serial(&input);
+		
+		sprintf(buffer,"PWM es: %s ", input);
+		
+	//	Muestra en Terminal el valor leído desde el PIC
+		for (char x = 0; x<15; x++)
+			{
+			putch (buffer[x]);
+			}
+		pause(200);
+	//	Retorno de Carro, Salto de línea en hex ASCII		
+		putch(0x0D); 
+	    putch(0x0A);
+		
+		pwm_1 = atoi(input);
+
+		//pwm_1 = 1023;
+		
+
+		CCPR1L = (pwm_1>>2) & 0xFF;
+		CCP1CON = 0x0C|((pwm_1 & 0x03)<<4); 
+		
+		pause(1000);
+
 		//Imprime en LCD 
 		lcd_goto(0);
-		lcd_puts(input);
+		lcd_puts("hOLA");
 		lcd_goto(0x40);
 		lcd_puts(val);
 		//esta pausa es para que el LCD muestre el mensaje
-		pause(2000);
+		pause(200);
 	
 		putch(0x0D); 
 	    putch(0x0A); 
@@ -255,7 +318,7 @@ void gets_Serial( char * s){
 
 
 /*
-void getString(char *input, unsigned int length){
+void getString(char *input,+ unsigned int length){
     for(int i=0;i<length;i++){                       
         input[i] = getch();                           //acquire each character until 10 chars are received
         if(input[i]==13)                              //or if newline is received

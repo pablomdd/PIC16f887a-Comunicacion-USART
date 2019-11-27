@@ -1680,44 +1680,47 @@ void lcd_write(unsigned char c)
 {
 pause(1);
 PORTD=((c >> 4) & 0x0F);
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 PORTD=(c & 0x0F);
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 }
 
 void lcd_clear(void)
 {
-RA7=0;
+RD7=0;
 lcd_write(0x1);
 pause(2);
 }
 
 void lcd_puts(const char * s)
 {
-RA7=1;
+RD7=1;
 while(*s)
 lcd_write(*s++);
 }
 
 void lcd_putch(char c)
 {
-RA7=1;
+RD7=1;
 lcd_write(c);
 }
 
 void lcd_goto(unsigned char pos)
 {
-RA7=0;
+RD7=0;
 lcd_write(0x80+pos);
 }
 
 void main(){
-ANSEL=0x00;
+ANSEL=0x60;
 ANSELH=0x00;
 
-TRISA = 0x00;
+TRISA = 0xFF;
+
 TRISB = 0x00;
+TRISC = 0x00;
 TRISD = 0x00;
+TRISE = 0x03;
 
 
 TRISE=0x03;
@@ -1731,20 +1734,20 @@ T2CKPS0 = 1;
 TMR2ON = 1;
 
 
-RA7=0;
-RA6=0;
+RD7=0;
+RD6=0;
 RE1=0;
 
 pause(15);
 PORTD=init_value;
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 pause(10);
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 pause(10);
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 pause(10);
 PORTD=2;
-((RA6=1),(RA6=0));
+((RD6=1),(RD6=0));
 
 lcd_write(0x28);
 lcd_write(0xC);
@@ -1762,7 +1765,7 @@ BAUDCTL=0x00;
 pause(500);
 
 
-PORTA=0x01;
+
 *pa=0xFF;
 
 
@@ -1770,6 +1773,17 @@ PORTA=0x01;
 char char_recibido;
 char char_pwm;
 char buffer[15];
+
+int entrada = 0;
+
+
+CCPR1L = 0x80;
+CCP1CON = 0x0C;
+
+TMR2ON = 1;
+
+unsigned int pwm_1 = 0;
+
 
 
 unsigned char pos=0;
@@ -1786,7 +1800,7 @@ pause(20);
 }
 putch(0x0D);
 putch(0x0A);
-PORTA=0x00;
+
 pause(1000);
 
 
@@ -1799,16 +1813,16 @@ int val;
 
 lcd_clear();
 
-ADCON0=0b11010101;
+ADCON0=0xD5;
 GO_DONE = 1;
 while (GO_DONE ==1);
 nin=(ADRESH<<2)|(ADRESL>>6);
-CCPR1L=ADRESH;
+
 
 num = num1*nin;
 int num_f = 255;
 
-sprintf(buffer,"El valor es:%i  ", nin);
+sprintf(buffer,"ADC es:%i  ", nin);
 
 
 for (char x = 0; x<17; x++)
@@ -1821,26 +1835,75 @@ putch(0x0D);
 putch(0x0A);
 
 
+
+
+sprintf(buffer,"PORTA es:%d ", PORTA);
+
+
+for (char x = 0; x<12; x++)
+{
+putch (buffer[x]);
+}
+pause(200);
+
+putch(0x0D);
+putch(0x0A);
+
+
+
+
 gets_Serial(&input);
+
+sprintf(buffer,"PORTB: %s  ", input);
 
 
 for (char x = 0; x<15; x++)
 {
-putch (input[x]);
+putch (buffer[x]);
 }
 pause(200);
+
+putch(0x0D);
+putch(0x0A);
 
 
 
 PORTB = atoi(input);
 
 
+
+
+gets_Serial(&input);
+
+sprintf(buffer,"PWM es: %s ", input);
+
+
+for (char x = 0; x<15; x++)
+{
+putch (buffer[x]);
+}
+pause(200);
+
+putch(0x0D);
+putch(0x0A);
+
+pwm_1 = atoi(input);
+
+
+
+
+CCPR1L = (pwm_1>>2) & 0xFF;
+CCP1CON = 0x0C|((pwm_1 & 0x03)<<4);
+
+pause(1000);
+
+
 lcd_goto(0);
-lcd_puts(input);
+lcd_puts("hOLA");
 lcd_goto(0x40);
 lcd_puts(val);
 
-pause(2000);
+pause(200);
 
 putch(0x0D);
 putch(0x0A);
