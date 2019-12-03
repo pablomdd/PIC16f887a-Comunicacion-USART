@@ -104,6 +104,7 @@ function Enviar_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 clc; disp('BEGIN')
+delete(instrfind);
 SerPIC=serial('COM5');
 set(SerPIC,'BaudRate',9600);
 set(SerPIC,'DataBits',8);
@@ -115,7 +116,9 @@ pwm=convertStringsToChars(get(handles.PWM,'string'))
 leds=convertStringsToChars(get(handles.LEDS,'string'))
 fprintf(SerPIC,'%c',leds); pause(0.2)
 fprintf(SerPIC,'%c',pwm);pause(0.2)
-dip=convertCharsToStrings(fscanf(SerPIC,'%c'))
+dip=convertCharsToStrings(fscanf(SerPIC,'%c'));
+% voltaje = str2num(fscanf(SerPIC,'%c'))*0.00488758553;
+% dip = num2str(voltaje)
 set(handles.DIP,'string',dip);pause(0.2)
 porta1=(fscanf(SerPIC,'%c'));
 porta=convertCharsToStrings(porta1)
@@ -124,7 +127,7 @@ fclose(SerPIC);
 delete(SerPIC);
 clear SerPIC;
 disp('stop');
-set(handles.POR,'string',str2num(pwm)*(100/1024));
+set(handles.POR,'string',str2num(pwm)*(100/1023));
 set(handles.bin1,'string',dec2bin(str2num(leds)));
 set(handles.bin2,'string',dec2bin(str2num(porta1)));
 

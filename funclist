@@ -1,20 +1,14 @@
-_lcd_puts: CODE, 760 0 24
-_putch: CODE, 651 0 8
-___ftpack: CODE, 1097 0 62
-_main: CODE, 1458 0 590
-_atoi: CODE, 830 0 90
-_lcd_clear: CODE, 749 0 11
-___lwdiv: CODE, 1374 0 42
-_lcd_goto: CODE, 742 0 7
-_gets_Serial: CODE, 678 0 58
-_isdigit: CODE, 920 0 14
-_sprintf: CODE, 1169 0 205
-_pause: CODE, 802 0 17
-_getch: CODE, 736 0 6
-___lwmod: CODE, 1416 0 36
-_lcd_write: CODE, 784 0 18
-___ftmul: CODE, 986 0 111
-___awtoft: CODE, 959 0 27
-___wmul: CODE, 934 0 25
-_msecbase: CODE, 819 0 11
-Total: 1362
+_lcd_puts: CODE, 1070 0 24
+_lcd_putch: CODE, 1054 0 3
+_putch: CODE, 897 0 6
+_main: CODE, 1140 0 908
+_lcd_clear: CODE, 1061 0 9
+___lwdiv: CODE, 938 0 42
+_lcd_goto: CODE, 1057 0 4
+_pause: CODE, 1112 0 17
+_getch: CODE, 893 0 4
+_lcd_write: CODE, 1094 0 18
+_con_ascii: CODE, 980 0 74
+___wmul: CODE, 913 0 25
+_msecbase: CODE, 1129 0 11
+Total: 1145
