@@ -172,11 +172,6 @@ void main(){
 	lcd_write(0x06);
 	PORTB=0;
 	
-	CCPR1L 	= 0x80;
-	CCP1CON	= 0x0C;
-
-	TMR2ON	= 1;
-
     RX_PIN=1; 
     TX_PIN=0; 
     OSCCON=0x70; 
@@ -269,11 +264,7 @@ unsigned int pb1;
 	pb=((char_recibido-48)*100)+((char_recibido1-48)*10)+((char_recibido2-48));
 	pb1=((char_recibido3-48)*1000)+((char_recibido4-48)*100)+((char_recibido5-48)*10)+char_recibido6-48;
 	PORTB=pb;
-	
-	CCPR1L = (pb1>>2) & 0xFF;
-	CCP1CON = 0x0C|((pb1 & 0x03)<<4); 
-
-//	CCPR1L=pb1;
+	CCPR1L=pb1;
 	//	pause(1500);
 		//lcd_goto(0);
 		//lcd_puts("hola");

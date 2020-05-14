@@ -1553,7 +1553,76 @@ extern void memcpyee(eeprom unsigned char *to, const unsigned char *from, unsign
 #pragma inline(_delay)
 extern void _delay(unsigned long);
 
+# 12 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+typedef int ptrdiff_t;
+typedef unsigned size_t;
+typedef unsigned short wchar_t;
+
+# 31 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdarg.h"
+typedef void * va_list[1];
+
+#pragma inline(__va_start)
+extern void * __va_start(void);
+
+#pragma inline(__va_arg)
+extern void * __va_arg(void *, ...);
+
+# 27 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+extern int errno;
+
+# 58
+struct __prbuf
+{
+char * ptr;
+void (* func)(char);
+};
+
+# 17 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\conio.h"
+extern int errno;
+
+
+extern void init_uart(void);
+
+extern char getch(void);
+extern char getche(void);
+extern void putch(char);
+extern void ungetch(char);
+
+extern bit kbhit(void);
+
+# 31
+extern char * cgets(char *);
+extern void cputs(const char *);
+
+# 103 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\include\stdio.h"
+extern int cprintf(char *, ...);
+#pragma printf_check(cprintf)
+
+
+
+extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+
+# 195
+extern char * gets(char *);
+extern int puts(const char *);
+extern int scanf(const char *, ...);
+extern int sscanf(const char *, const char *, ...);
+extern int vprintf(const char *, va_list);
+extern int vsprintf(char *, const char *, va_list);
+extern int vscanf(const char *, va_list ap);
+extern int vsscanf(const char *, const char *, va_list);
+
+#pragma printf_check(printf) const
+#pragma printf_check(sprintf) const
+extern int sprintf(char *, const char *, ...);
+extern int printf(const char *, ...);
+
 # 6 "C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c"
+unsigned int nin;
+unsigned char carac[5];
+unsigned int num;
+int sal;
+unsigned short b0=0;
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFC & 0xFFF7 & 0xFFFF & 0xFFDF & 0xFFFF & 0xFFFF & 0xFCFF & 0xFBFF & 0xF7FF & 0xEFFF & 0xFFFF");
 asm("\tpsect config,class=CONFIG,delta=2"); asm("\tdw ""0xFFFF & 0xFFFF");
 
@@ -1583,72 +1652,140 @@ int atoi( const char * s );
 
 
 
-char init_value=0x03;
+char init_value=3;
 
-# 53
+# 48
 void lcd_write(unsigned char c)
 {
 pause(1);
 PORTD=((c >> 4) & 0x0F);
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 PORTD=(c & 0x0F);
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 }
 
 void lcd_clear(void)
 {
-RA7=0;
+RE2=0;
 lcd_write(0x1);
 pause(2);
 }
 
 void lcd_puts(const char * s)
 {
-RA7=1;
+RE2=1;
 while(*s)
 lcd_write(*s++);
 }
 
 void lcd_putch(char c)
 {
-RA7=1;
+RE2=1;
 lcd_write(c);
 }
 
 void lcd_goto(unsigned char pos)
 {
-RA7=0;
+RE2=0;
 lcd_write(0x80+pos);
 }
 
+int con_val(char a, char b, char c)
+{
+int salidita=((a-48)*100)+((b-48)*10)+(c-48);
+return salidita;
+}
 
+int con_ascii(int entrar)
+{
+if(entrar==0)
+{
+sal=48;
+}
+else if(entrar==1)
+{
+sal=49;
+}
+else if(entrar==2)
+{
+sal=50;
+}
+else if(entrar==3)
+{
+sal=51;
+}
+else if(entrar==4)
+{
+sal=52;
+}
+else if(entrar==5)
+{
+sal=53;
+}
+else if(entrar==6)
+{
+sal=54;
+}
+else if(entrar==7)
+{
+sal=55;
+}
+else if(entrar==8)
+{
+sal=56;
+}
+else if(entrar==9)
+{
+sal=57;
+}
+return sal;
+}
 
 void main(){
-ANSEL=0x00;
+ANSEL=32;
+OSCCON=0xC0;
 ANSELH=0x00;
 INTCON=0x00;
-TRISA = 0x00;
-TRISB = 0x00;
-TRISD = 0x00;
-
-RA7=0;
-RA6=0;
+TRISA = 0xFF;
+TRISB = 0;
+TRISC=6;
+TRISD= 0x00;
+TRISE= 1;
+PR2=0xFC;
+CCP2CON=0x0C;
+CCP1CON=0x0C;
+CCPR1L=0x80;
+CCPR2L=0x80;
+PIR1=0;
+T2CON=0x07;
+while(PIR1);
+TRISC1=0;
+TRISC2=0;
+RE2=0;
 RE1=0;
+RE0=0;
 
+pause(15);
 PORTD=init_value;
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 pause(10);
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 pause(10);
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 pause(10);
 PORTD=2;
-((RA6=1),(RA6=0));
+((RE1=1),(RE1=0));
 
 lcd_write(0x28);
 lcd_write(0xC);
 lcd_clear();
 lcd_write(0x06);
+PORTB=0;
+
+CCPR1L = 0x80;
+CCP1CON = 0x0C;
+
+TMR2ON = 1;
 
 TRISC7=1;
 TRISC6=0;
@@ -1662,51 +1799,123 @@ PORTA=0x01;
 *pa=0xFF;
 
 char char_recibido;
+char char_recibido1;
+char char_recibido2;
 
-
-unsigned char pos=0;
-for(int i=48; i<58; i++){
-putch(i);
-pause(20);
-}
-putch(0x0D);
-putch(0x0A);
-
-for(int i=97; i<123; i++){
-putch(i);
-pause(20);
-}
-putch(0x0D);
-putch(0x0A);
-PORTA=0x00;
-pause(1000);
-
-# 176
+# 200
 while(1){
+ADCON0=0xD5;
+GO_DONE=1;
+while(GO_DONE==1);
+nin=((ADRESH<<2)|(ADRESL>>6));
+num=nin;
+unsigned int d;
+unsigned int c;
+unsigned int u;
+unsigned int dc;
+unsigned int numd=num/10;
+unsigned int numc=num/100;
+unsigned int numdc=num/1000;
+dc=con_ascii(numdc);
+numc=numc-(numdc*10);
+c=con_ascii(numc);
+numd=numd-(numc*10)-(numdc*100);
+d=con_ascii(numd);
+unsigned int numu=num-(numdc*1000)-(numc*100)-(numd*10);
+u=con_ascii(numu);
+
+putch(dc);
+putch(c);
+putch(d);
+putch(u);
+putch(0x0D);
+putch(0x0A);
+
+num=PORTA;
+numd=num/10;
+numc=numd/10;
+c=con_ascii(numc);
+numd=numd-(numc*10);
+d=con_ascii(numd);
+numu=num-(numc*100)-(numd*10);
+u=con_ascii(numu);
+
+putch(c);
+putch(d);
+putch(u);
+putch(0x0D);
+putch(0x0A);
+
+
+
+
 char_recibido = getch();
-putch(char_recibido);
-putch(0x0D);
-putch(0x0A);
+char_recibido1 = getch();
+char_recibido2 = getch();
 
+# 255
+unsigned char char_recibido3;
+unsigned char char_recibido4;
+unsigned char char_recibido5;
+unsigned char char_recibido6;
+char_recibido3 = getch();
+char_recibido4 = getch();
+char_recibido5 = getch();
+char_recibido6 = getch();
+
+
+
+
+unsigned int pb;
+unsigned int pb1;
+pb=((char_recibido-48)*100)+((char_recibido1-48)*10)+((char_recibido2-48));
+pb1=((char_recibido3-48)*1000)+((char_recibido4-48)*100)+((char_recibido5-48)*10)+char_recibido6-48;
+PORTB=pb;
+
+CCPR1L = (pb1>>2) & 0xFF;
+CCP1CON = 0x0C|((pb1 & 0x03)<<4);
+
+# 296
+lcd_clear();
+if(char_recibido>50)
+{
+char_recibido=50;
+}
+if(char_recibido==50)
+{
+if(char_recibido1>53)
+{
+char_recibido1=53;
+}
+if(char_recibido2>53)
+{
+char_recibido2=53;
+}
+}
 lcd_goto(0);
+lcd_puts("LEDS:");
+lcd_goto(6);
 lcd_putch(char_recibido);
-pause(500);
+lcd_goto(7);
+lcd_putch(char_recibido1);
+lcd_goto(8);
+lcd_putch(char_recibido2);
+lcd_goto(0x40);
+lcd_puts("PWM:");
+lcd_goto(0x45);
+lcd_putch(char_recibido3);
+lcd_goto(0x46);
+lcd_putch(char_recibido4);
+lcd_goto(0x47);
+lcd_putch(char_recibido5);
+lcd_goto(0x48);
+lcd_putch(char_recibido6);
 
-for(int i=97; i<123; i++){
-putch(i);
-pause(20);
+# 341
 }
-putch(0x0D);
-putch(0x0A);
-
 
 
 }
-
-
-}
-
-
 
 
 void putch(char dato)
@@ -1733,3 +1942,15 @@ if(c==10 | c==13) break;
 PORTA=0x00;
 }
 
+
+
+void getString(char *input, unsigned int length){
+for(int i=0;i<length;i++){
+input[i] = getch();
+if(input[i]==13)
+break;
+}
+
+
+
+}

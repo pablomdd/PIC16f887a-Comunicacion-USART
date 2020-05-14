@@ -259,15 +259,23 @@ extern double fmod(double, double);
 extern double trunc(double);
 extern double round(double);
 
-# 451 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c"
+# 350 "C:\Program Files (x86)\HI-TECH Software\PICC\9.82\lib\doprnt.c"
+const static unsigned int dpowers[] = {1, 10, 100, 1000, 10000,
+
+# 355
+};
+
+# 451
 int
 
-# 460
-printf(const char * f, ...)
+# 487
+sprintf(char * sp, const char * f, ...)
 {
 va_list ap;
 
-# 494
+
+
+
 signed char c;
 
 # 501
@@ -293,7 +301,7 @@ while(c = *f++) {
 if(c != '%')
 
 {
-(putch(c) );
+((*sp++ = (c)));
 continue;
 }
 
@@ -306,26 +314,77 @@ switch(c = *f++) {
 case 0:
 goto alldone;
 
-# 787
-case 'c':
+# 700
+case 'd':
+case 'i':
+break;
 
-# 802
-c = (*(int *)__va_arg((*(int **)ap), (int)0));
+# 731
+case 's':
 
+# 737
+_val._str._cp = (*(const char * *)__va_arg((*(const char * **)ap), (const char *)0));
 
+# 743
+if(!_val._str._cp)
+_val._str._cp = "(null)";
+
+# 780
+while(*_val._str._cp)
+((*sp++ = (*_val._str._cp++)));
+continue;
+
+# 805
 default:
 
-# 812
-(putch(c) );
+# 816
 continue;
 
 # 825
 }
 
+# 1248
+{
+
+# 1254
+_val._val = (int)(*(int *)__va_arg((*(int **)ap), (int)0));
+
+if((int)_val._val < 0) {
+flag |= 0x03;
+_val._val = -_val._val;
+}
+
+}
+
+# 1300
+for(c = 1 ; c != sizeof dpowers/sizeof dpowers[0] ; c++)
+if(_val._val < dpowers[c])
+break;
+
 # 1417
 {
 
+# 1433
+if(flag & 0x03)
+((*sp++ = ('-')));
+
 # 1464
+}
+
+
+prec = c;
+
+while(prec--) {
+
+# 1473
+{
+
+# 1484
+c = (_val._val / dpowers[prec]) % 10 + '0';
+
+# 1515
+}
+((*sp++ = (c)));
 }
 
 # 1525
@@ -333,7 +392,9 @@ continue;
 
 alldone:
 
-# 1532
+
+*sp = 0;
+
 return 0;
 }
 

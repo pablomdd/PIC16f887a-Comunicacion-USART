@@ -732,28 +732,34 @@
 [v ___tmul `(um  1 e 3 0 ]
 "3 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\sources\wmul.c
 [v ___wmul `(ui  1 e 2 0 ]
-"9 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+"14 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
 [v _msecbase `(v  1 e 0 0 ]
-"18
+"23
 [v _pause `(v  1 e 0 0 ]
-"54
+"49
 [v _lcd_write `(v  1 e 0 0 ]
-"63
+"58
 [v _lcd_clear `(v  1 e 0 0 ]
-"70
+"65
 [v _lcd_puts `(v  1 e 0 0 ]
-"77
+"72
 [v _lcd_putch `(v  1 e 0 0 ]
-"83
+"78
 [v _lcd_goto `(v  1 e 0 0 ]
+"84
+[v _con_val `(i  1 e 2 0 ]
 "90
+[v _con_ascii `(i  1 e 2 0 ]
+"134
 [v _main `(v  1 e 0 0 ]
-"204
+"348
 [v _putch `(v  1 e 0 0 ]
-"210
+"354
 [v _getch `(uc  1 e 1 0 ]
-"215
+"359
 [v _gets_Serial `(v  1 e 0 0 ]
+"373
+[v _getString `(v  1 e 0 0 ]
 "7 eeprom.c
 [v _eecpymem `(v  1 e 0 0 ]
 "25
@@ -1804,68 +1810,135 @@
 [v _ANSELHbits `VES1744  1 e 1 @393 ]
 "1662
 [v _EECON1bits `VES1767  1 e 1 @396 ]
-"90 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+"6 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
+[v _nin `ui  1 e 2 0 ]
+"8
+[v _num `ui  1 e 2 0 ]
+"9
+[v _sal `i  1 e 2 0 ]
+"134
 [v _main `(v  1 e 0 0 ]
 {
-"186
-[v main@i_1810 `i  1 a 2 11 ]
-"139
-[v main@i_1809 `i  1 a 2 9 ]
-"132
-[v main@i `i  1 a 2 7 ]
-"128
-[v main@char_recibido `uc  1 a 1 6 ]
-"198
+"211
+[v main@numc `ui  1 a 2 25 ]
+"210
+[v main@numd `ui  1 a 2 23 ]
+"212
+[v main@numdc `ui  1 a 2 20 ]
+"218
+[v main@numu `ui  1 a 2 16 ]
+"268
+[v main@pb1 `ui  1 a 2 14 ]
+"208
+[v main@u `ui  1 a 2 8 ]
+"207
+[v main@c `ui  1 a 2 6 ]
+"206
+[v main@d `ui  1 a 2 4 ]
+"267
+[v main@pb `ui  1 a 2 2 ]
+"209
+[v main@dc `ui  1 a 2 0 ]
+"258
+[v main@char_recibido6 `uc  1 a 1 13 ]
+"257
+[v main@char_recibido5 `uc  1 a 1 12 ]
+"256
+[v main@char_recibido4 `uc  1 a 1 11 ]
+"255
+[v main@char_recibido3 `uc  1 a 1 10 ]
+"191
+[v main@char_recibido `uc  1 a 1 22 ]
+"193
+[v main@char_recibido2 `uc  1 a 1 19 ]
+"192
+[v main@char_recibido1 `uc  1 a 1 18 ]
+"344
 } 0
-"83
+"78
 [v _lcd_goto `(v  1 e 0 0 ]
 {
 [v lcd_goto@pos `uc  1 a 1 wreg ]
 [v lcd_goto@pos `uc  1 a 1 wreg ]
-"86
+"81
 } 0
-"77
+"72
 [v _lcd_putch `(v  1 e 0 0 ]
 {
 [v lcd_putch@c `uc  1 a 1 wreg ]
 [v lcd_putch@c `uc  1 a 1 wreg ]
-"80
+"75
 } 0
-"63
+"65
+[v _lcd_puts `(v  1 e 0 0 ]
+{
+[v lcd_puts@s `*.cDCuc  1 a 1 wreg ]
+[v lcd_puts@s `*.cDCuc  1 a 1 wreg ]
+"69
+} 0
+"58
 [v _lcd_clear `(v  1 e 0 0 ]
 {
-"67
+"62
 } 0
-"54
+"49
 [v _lcd_write `(v  1 e 0 0 ]
 {
 [v lcd_write@c `uc  1 a 1 wreg ]
 [v lcd_write@c `uc  1 a 1 wreg ]
-"60
+"55
 } 0
-"18
+"23
 [v _pause `(v  1 e 0 0 ]
 {
-"19
+"24
 [v pause@x `us  1 a 2 2 ]
-"18
+"23
 [v pause@msvalue `us  1 p 2 0 ]
-"20
+"25
 } 0
-"210
+"5 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\sources\lwdiv.c
+[v ___lwdiv `(ui  1 e 2 0 ]
+{
+"6
+[v ___lwdiv@quotient `ui  1 a 2 4 ]
+"7
+[v ___lwdiv@counter `uc  1 a 1 6 ]
+"5
+[v ___lwdiv@divisor `ui  1 p 2 0 ]
+[v ___lwdiv@dividend `ui  1 p 2 2 ]
+"26
+} 0
+"3 C:\Program Files (x86)\HI-TECH Software\PICC\9.82\sources\wmul.c
+[v ___wmul `(ui  1 e 2 0 ]
+{
+"4
+[v ___wmul@product `ui  1 a 2 4 ]
+"3
+[v ___wmul@multiplier `ui  1 p 2 0 ]
+[v ___wmul@multiplicand `ui  1 p 2 2 ]
+"13
+} 0
+"354 C:\Users\petir\Documents\PIC_PROG\C_PuertoSerial\C_PuertoSerial_usart.c
 [v _getch `(uc  1 e 1 0 ]
 {
-"213
+"357
 } 0
-"204
+"348
 [v _putch `(v  1 e 0 0 ]
 {
 [v putch@dato `uc  1 a 1 wreg ]
 [v putch@dato `uc  1 a 1 wreg ]
-"207
+"351
 } 0
-"9
+"90
+[v _con_ascii `(i  1 e 2 0 ]
+{
+[v con_ascii@entrar `i  1 p 2 0 ]
+"132
+} 0
+"14
 [v _msecbase `(v  1 e 0 0 ]
 {
-"16
+"21
 } 0

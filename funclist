@@ -1,10 +1,14 @@
-_lcd_putch: CODE, 1693 0 3
-_putch: CODE, 1685 0 8
-_main: CODE, 1755 0 293
-_lcd_clear: CODE, 1700 0 9
-_lcd_goto: CODE, 1696 0 4
-_pause: CODE, 1727 0 17
-_getch: CODE, 1679 0 6
-_lcd_write: CODE, 1709 0 18
-_msecbase: CODE, 1744 0 11
-Total: 369
+_lcd_puts: CODE, 1070 0 24
+_lcd_putch: CODE, 1054 0 3
+_putch: CODE, 897 0 6
+_main: CODE, 1140 0 908
+_lcd_clear: CODE, 1061 0 9
+___lwdiv: CODE, 938 0 42
+_lcd_goto: CODE, 1057 0 4
+_pause: CODE, 1112 0 17
+_getch: CODE, 893 0 4
+_lcd_write: CODE, 1094 0 18
+_con_ascii: CODE, 980 0 74
+___wmul: CODE, 913 0 25
+_msecbase: CODE, 1129 0 11
+Total: 1145
